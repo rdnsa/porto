@@ -16,7 +16,7 @@ INSERT INTO stats (value, label, detail, sort) VALUES ('224k', 'Organic search i
 INSERT INTO stats (value, label, detail, sort) VALUES ('−66%', 'Monthly operating cost', '$150 → $50/month via VPS migration & LLM token optimization', 1);
 INSERT INTO stats (value, label, detail, sort) VALUES ('10', 'Engineers & IT professionals led', 'Frontend, backend, QA, BA, UI/UX, marketing, IT support', 2);
 INSERT INTO stats (value, label, detail, sort) VALUES ('~3 wks', 'Ahead of schedule', 'Satglow ERP database refactor', 3);
-INSERT INTO stats (value, label, detail, sort) VALUES ('0', 'Go-live implementation issues', 'NordPartners, delivered ~5 days early', 4);
+INSERT INTO stats (value, label, detail, sort) VALUES ('~5 days', 'Early go-live, zero issues', 'NordPartners, delivered ahead of schedule with no implementation issues', 4);
 INSERT INTO stats (value, label, detail, sort) VALUES ('3.97', 'GPA — Best Graduate', 'Top of the Information Technology class, on a full-ride scholarship', 5);
 INSERT INTO skill_groups (title, kind, items, sort) VALUES ('Project Management', 'core', '["Sprint Planning","Sprint Retrospective","Project Monitoring","Delivery Management"]', 0);
 INSERT INTO skill_groups (title, kind, items, sort) VALUES ('Product Management', 'core', '["Requirement Gathering","Product Roadmap","Product Prioritization","Stakeholder Discussion","Backlog Grooming"]', 1);

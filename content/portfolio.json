@@ -57,9 +57,9 @@
       "detail": "Satglow ERP database refactor"
     },
     {
-      "value": "0",
-      "label": "Go-live implementation issues",
-      "detail": "NordPartners, delivered ~5 days early"
+      "value": "~5 days",
+      "label": "Early go-live, zero issues",
+      "detail": "NordPartners, delivered ahead of schedule with no implementation issues"
     },
     {
       "value": "3.97",

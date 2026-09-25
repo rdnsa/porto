@@ -15,7 +15,7 @@ import { prefersReducedMotion } from "../lib/scroll";
 import { Reveal, SectionHeading } from "./ui";
 
 const GAP = 20;
-const SLIDE_MS = 5000;
+const SLIDE_MS = 2000;
 const DRAG_THRESHOLD = 6;
 
 /**
