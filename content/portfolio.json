@@ -1,0 +1,688 @@
+{
+  "profile": {
+    "firstName": "Raden",
+    "lastName": "Issa",
+    "fullName": "Raden Mochamad Issa Wirakusumah",
+    "role": "Product & Project Manager",
+    "tagline": "Driving projects, products & growth.",
+    "intro": "Bridging business needs and engineering teams. Shipping ahead of schedule.",
+    "summary": "I'm a Project Manager with a technical background in software development, currently managing several digital products at once. I write the backlog tickets, prioritize the work, monitor delivery and keep stakeholders aligned. With hands-on engineering experience, I understand system requirements well enough to bridge business needs and the development team.",
+    "location": "South Jakarta, Indonesia",
+    "email": "rdnsa123@gmail.com",
+    "availability": "Have a product to ship or a team to lead? Let's talk.",
+    "currentCompany": "PT InfantAI Teknologi Nusantara",
+    "portrait": "profile/portrait.webp",
+    "portraitCutout": "profile/portrait-cutout.webp",
+    "aboutImage": "about/itb-gig-economy.webp",
+    "aboutImageCaption": "Aula Timur ITB, Bandung — launch of Pelatihan GIG Economy & the AI Open Innovation Challenge, January 2026.",
+    "ogImage": "og/cover.jpg",
+    "resume": null
+  },
+  "socials": [
+    {
+      "label": "LinkedIn",
+      "handle": "in/rdnsa",
+      "url": "https://www.linkedin.com/in/rdnsa/"
+    },
+    {
+      "label": "Instagram",
+      "handle": "@_rdnsa_",
+      "url": "https://www.instagram.com/_rdnsa_/"
+    },
+    {
+      "label": "GitHub",
+      "handle": "rdnsa",
+      "url": "https://github.com/rdnsa"
+    }
+  ],
+  "stats": [
+    {
+      "value": "224k",
+      "label": "Organic search impressions",
+      "detail": "IFC News, starting from zero organic traffic"
+    },
+    {
+      "value": "−66%",
+      "label": "Monthly operating cost",
+      "detail": "$150 → $50/month via VPS migration & LLM token optimization"
+    },
+    {
+      "value": "10",
+      "label": "Engineers & IT professionals led",
+      "detail": "Frontend, backend, QA, BA, UI/UX, marketing, IT support"
+    },
+    {
+      "value": "~3 wks",
+      "label": "Ahead of schedule",
+      "detail": "Satglow ERP database refactor"
+    },
+    {
+      "value": "0",
+      "label": "Go-live implementation issues",
+      "detail": "NordPartners, delivered ~5 days early"
+    },
+    {
+      "value": "3.97",
+      "label": "GPA — Best Graduate",
+      "detail": "Top of the Information Technology class, on a full-ride scholarship"
+    }
+  ],
+  "skills": [
+    {
+      "title": "Project Management",
+      "kind": "core",
+      "items": [
+        "Sprint Planning",
+        "Sprint Retrospective",
+        "Project Monitoring",
+        "Delivery Management"
+      ]
+    },
+    {
+      "title": "Product Management",
+      "kind": "core",
+      "items": [
+        "Requirement Gathering",
+        "Product Roadmap",
+        "Product Prioritization",
+        "Stakeholder Discussion",
+        "Backlog Grooming"
+      ]
+    },
+    {
+      "title": "Business Growth",
+      "kind": "core",
+      "items": [
+        "SEO Strategy",
+        "Product Pitching",
+        "Marketing Planning",
+        "Cross-Functional Collaboration"
+      ]
+    },
+    {
+      "title": "Toolkit",
+      "kind": "tools",
+      "items": [
+        "Scrum",
+        "RAD",
+        "Jira",
+        "Confluence",
+        "Notion",
+        "GitHub Projects",
+        "SQL",
+        "Laravel",
+        "Docker",
+        "Redis",
+        "Go"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "slug": "ifc-news",
+      "name": "IFC News",
+      "category": "AI · Fintech media",
+      "tagline": "AI-powered financial news & investment platform.",
+      "summary": "An AI-powered financial platform designed to bridge the gap between complex market data and actionable investment intelligence for emerging investors.",
+      "description": "A digital financial platform that helps users discover, understand, and analyze financial market information through news, market insights, and AI-powered features.",
+      "role": "Product & Project Manager",
+      "roleDetail": "Set up the development process and product roadmap, then pulled the growth levers — SEO, infrastructure cost, payments and a freemium tier.",
+      "company": "PT InfantAI Teknologi Nusantara",
+      "year": "2025 — 2026",
+      "url": "https://ifcnews.id",
+      "cover": "projects/ifc-news/home.webp",
+      "coverAlt": "IFC News homepage: Indonesian markets, decoded by AI",
+      "theme": "light",
+      "metrics": [
+        {
+          "value": "224k",
+          "label": "Total impressions"
+        },
+        {
+          "value": "945",
+          "label": "Total clicks"
+        },
+        {
+          "value": "15k",
+          "label": "Peak daily impressions"
+        },
+        {
+          "value": "64",
+          "label": "Peak daily clicks"
+        }
+      ],
+      "modules": [
+        {
+          "title": "Financial News",
+          "body": "Indonesian market news with real-time translation into the reader's language."
+        },
+        {
+          "title": "AI-Powered Insights",
+          "body": "AI summaries and sentiment on every story, alongside revenue, net profit and market cap."
+        },
+        {
+          "title": "Stock Picks & Weekly Analysis",
+          "body": "A daily top pick with target price and stop-loss, plus market sentiment and weekly analysis."
+        },
+        {
+          "title": "Personalized Interests",
+          "body": "A feed shaped around each reader's financial interests."
+        }
+      ],
+      "flows": [],
+      "stories": [
+        {
+          "title": "Process & organic growth",
+          "challenge": [
+            "No structured **SDLC** was in place.",
+            "Development was handled based on immediate needs, **without standardized processes, planning, or systems**.",
+            "**Organic traffic was at zero.**"
+          ],
+          "responsibilities": [
+            "Built a structured **development process**.",
+            "Improved **SEO performance** in less than 1 month.",
+            "Developed the product **roadmap**."
+          ],
+          "initiatives": [
+            "Implemented **Scrum & Sprint Planning**.",
+            "Managed **Backlog & Roadmap**.",
+            "Optimized **SEO foundations**.",
+            "Presented and pitched **IFCNews** at ITB."
+          ],
+          "impact": [
+            "**SEO** was completed **~20 days ahead of schedule**.",
+            "**Scrum** became the team's standard working process.",
+            "**Premium Subscription roadmap** was structured for the next 4 sprints."
+          ]
+        },
+        {
+          "title": "Cost efficiency & monetization",
+          "challenge": [
+            "**High operational costs** due to dependency on Railway hosting.",
+            "**No payment gateway integration** for direct user transactions.",
+            "**No freemium scheme** to support marketing and user acquisition strategies."
+          ],
+          "responsibilities": [
+            "**Reduced costs** and improved platform operational efficiency.",
+            "Led the **payment gateway implementation** for user transactions.",
+            "**Aligned the freemium scheme** with marketing acquisition targets."
+          ],
+          "initiatives": [
+            "**Migrated the server** from Railway to an **independent VPS**.",
+            "**Reduced server workload** to lower monthly operational costs.",
+            "Implemented **payment gateways** via Pakasir and Saweria.",
+            "Launched **a freemium model** to accelerate user acquisition."
+          ],
+          "impact": [
+            "**~66% expense efficiency** — operational costs cut from $150 to $50/month through controlled resource management.",
+            "**Secure payment gateway** integration to support transactions and recurring revenue.",
+            "Accelerated new user acquisition and marketing conversion through access to basic features (**Freemium Model**)."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "projects/ifc-news/news-stream.webp",
+          "alt": "IFC News news stream with AI summaries and sentiment",
+          "caption": "News Stream — AI summaries, sentiment and fundamentals on every story."
+        },
+        {
+          "src": "projects/ifc-news/search-console.webp",
+          "alt": "Google Search Console performance chart for ifcnews.id",
+          "caption": "Google Search Console, 3-month view (June 2026)."
+        },
+        {
+          "src": "projects/ifc-news/sprint-board.webp",
+          "alt": "IFC News development board on GitHub Projects",
+          "caption": "The sprint board on GitHub Projects."
+        },
+        {
+          "src": "projects/ifc-news/team.webp",
+          "alt": "The IFC News team in a working session",
+          "caption": "Working session with the IFC News team."
+        }
+      ]
+    },
+    {
+      "slug": "satglow-erp",
+      "name": "Satglow ERP",
+      "category": "ERP · Operations",
+      "tagline": "Warehouse & operations management system.",
+      "summary": "An integrated ERP solution designed to centralize multi-warehouse inventory, streamline operational work orders, and automate real-time stock deductions across event transactions.",
+      "description": "A centralized ERP system for Satellite of Glow to manage inventory across multiple warehouses, work orders, stock movements, and event cashier transactions.",
+      "role": "Project Manager",
+      "roleDetail": "Led the ERP implementation — a flexible development process, validated user requirements and a product roadmap.",
+      "company": "PT InfantAI Teknologi Nusantara",
+      "year": "2026",
+      "url": null,
+      "cover": "projects/satglow-erp/dashboard.webp",
+      "coverAlt": "Satglow ERP warehouse dashboard",
+      "theme": "light",
+      "metrics": [],
+      "modules": [
+        {
+          "title": "Multi-Warehouse Inventory",
+          "body": "One inventory across every warehouse, with vendors and warehouse transfers."
+        },
+        {
+          "title": "Work Orders",
+          "body": "Create and track operational work orders."
+        },
+        {
+          "title": "Stock Movements",
+          "body": "Track stock movements and inventory levels, down to barcode scans and checkouts."
+        },
+        {
+          "title": "Event Cashier",
+          "body": "Cashier transactions with real-time stock sync and automatic receipts."
+        }
+      ],
+      "flows": [],
+      "stories": [
+        {
+          "title": "Built from scratch",
+          "challenge": [
+            "The system was **developed from scratch**.",
+            "**Requirements** changed according to user needs.",
+            "There was no established **development lifecycle**."
+          ],
+          "responsibilities": [
+            "Established a flexible **development process**.",
+            "Ensured that **user requirements** were validated.",
+            "Developed a **product roadmap**."
+          ],
+          "initiatives": [
+            "**RAD method**: Requirement Planning, User Design, iterative Construction.",
+            "**Roadmap**: Division Master, Excel Engine, Batch Inventory, Expired Batching."
+          ],
+          "impact": [
+            "**DB refactor** completed **~3 weeks ahead of schedule**.",
+            "**Development lifecycle** became more structured.",
+            "**Requirements** became easier to validate."
+          ]
+        }
+      ],
+      "gallery": []
+    },
+    {
+      "slug": "nordpartners",
+      "name": "NordPartners",
+      "category": "PropTech · Partnerships",
+      "tagline": "Melbourne property partnership platform.",
+      "summary": "A digital partnership platform designed to connect investors with Melbourne property opportunities, streamlining the end-to-end journey from user onboarding and admin approval to QR-verified event access.",
+      "description": "NordPartners is a digital platform designed to support property partnership activities in Melbourne, connecting participants with property opportunities and managing the registration and approval process.",
+      "role": "Project & Product Manager",
+      "roleDetail": "Managed requirements, priorities, stakeholder coordination, and development delivery.",
+      "company": null,
+      "year": null,
+      "url": "https://nordpartners.id",
+      "cover": "projects/nordpartners/home.webp",
+      "coverAlt": "NordPartners homepage: strategic access to Australian property and investment opportunities",
+      "theme": "dark",
+      "metrics": [
+        {
+          "value": "~5 days",
+          "label": "Delivered ahead of schedule"
+        },
+        {
+          "value": "0",
+          "label": "Implementation issues at go-live"
+        }
+      ],
+      "modules": [
+        {
+          "title": "Property Opportunity & Registration",
+          "body": "Present Melbourne property opportunities to participants. Manages user registration and participation flow from initial sign-up through onboarding."
+        },
+        {
+          "title": "Verification & Admin Approval",
+          "body": "Email verification for registered users ensures authenticity. Admin reviews and approves participants before granting access to property events."
+        },
+        {
+          "title": "Event Access Management",
+          "body": "QR-based access system for approved participants at property events. Streamlines entry and ensures only verified, approved users gain access."
+        }
+      ],
+      "flows": [
+        {
+          "title": "Key value",
+          "steps": [
+            "Property opportunity",
+            "Registration",
+            "Verification",
+            "Approval",
+            "Event"
+          ]
+        }
+      ],
+      "stories": [
+        {
+          "title": "Shipping while requirements move",
+          "challenge": [
+            "**Requirements** evolved according to **stakeholder needs**."
+          ],
+          "responsibilities": [
+            "Ensured delivery remained aligned with the **target** and **stakeholder expectations**."
+          ],
+          "initiatives": [
+            "Used the **RAD** methodology.",
+            "Managed **requirements** and development **priorities**.",
+            "**Coordinated** the delivery of the KCL × NØRD module.",
+            "Developed a **conversion monitoring roadmap**."
+          ],
+          "impact": [
+            "Delivery was completed approximately **5 days ahead of schedule**.",
+            "**Zero implementation issues** during go-live."
+          ]
+        }
+      ],
+      "gallery": []
+    },
+    {
+      "slug": "nose-one",
+      "name": "NOSE ONE",
+      "category": "ERP · HRIS",
+      "tagline": "Integrated factory management platform — NOSE HRIS.",
+      "summary": "A centralized HRIS module within a comprehensive factory ERP platform, built to unify employee data, complex attendance shifts, payroll, and talent acquisition into a single operational hub.",
+      "description": "NOSE ONE is an integrated system that connects multiple factory divisions into one centralized platform. I managed the HRIS scope, focusing on employee management, attendance, payroll, and talent operations.",
+      "role": "Project Manager",
+      "roleDetail": "Managed HRIS requirements, priorities, workflow design, stakeholder coordination & delivery.",
+      "company": "PT Nose Herbal Indo",
+      "year": "2026",
+      "url": null,
+      "cover": "projects/nose-one/dashboard.webp",
+      "coverAlt": "NOSE ONE HRIS dashboard",
+      "theme": "light",
+      "metrics": [],
+      "modules": [
+        {
+          "title": "People",
+          "body": "Employees, organization and manpower."
+        },
+        {
+          "title": "Attendance",
+          "body": "Shifts, overtime, leave and compliance."
+        },
+        {
+          "title": "Payroll",
+          "body": "Payroll management."
+        },
+        {
+          "title": "Talent",
+          "body": "Recruitment and onboarding."
+        }
+      ],
+      "flows": [
+        {
+          "title": "Key value",
+          "steps": [
+            "One system",
+            "Centralized HR data",
+            "Integrated HR operations",
+            "Better management visibility"
+          ]
+        }
+      ],
+      "stories": [],
+      "gallery": []
+    },
+    {
+      "slug": "aix-expo",
+      "name": "AIX Expo",
+      "category": "Events · AI",
+      "tagline": "AI summit & exhibition platform.",
+      "summary": "An integrated event and exhibition platform built to connect global tech enterprises, industry professionals, and attendees through curated AI showcases, summits, and business matchmaking.",
+      "description": "AIX Expo is a digital platform supporting an AI-focused summit and exhibition, connecting technology companies, businesses, professionals, creators, and visitors through an integrated event experience.",
+      "role": "Project Manager",
+      "roleDetail": "Managed project requirements, priorities, stakeholder coordination, and development delivery.",
+      "company": null,
+      "year": "2026",
+      "url": null,
+      "cover": "projects/aix-expo/home.webp",
+      "coverAlt": "AIX Indonesia homepage: Indonesia's premier AI Summit",
+      "theme": "dark",
+      "metrics": [],
+      "modules": [
+        {
+          "title": "AI Exhibition",
+          "body": "Showcase AI technologies and solutions."
+        },
+        {
+          "title": "Summit",
+          "body": "Support AI-focused discussions and sessions."
+        },
+        {
+          "title": "Business Connection",
+          "body": "Connect companies and potential partners."
+        },
+        {
+          "title": "Visitor Experience",
+          "body": "Provide information and access to the event."
+        }
+      ],
+      "flows": [
+        {
+          "title": "Ecosystem",
+          "steps": [
+            "Technology companies",
+            "AIX Expo",
+            "Businesses & professionals",
+            "Visitors"
+          ]
+        },
+        {
+          "title": "Key value",
+          "steps": [
+            "AI technology",
+            "Exhibition",
+            "Connection",
+            "Experience"
+          ]
+        }
+      ],
+      "stories": [],
+      "gallery": []
+    },
+    {
+      "slug": "genius-ai",
+      "name": "Genius AI",
+      "category": "AI hardware · EdTech",
+      "tagline": "A conversational learning companion for kids.",
+      "summary": "An interactive AI-powered educational device that bridges embedded hardware and top-tier LLMs to create an engaging, child-friendly conversational learning experience.",
+      "description": "Part of InfantAI's early-education line: a compact companion device that pairs embedded hardware with top-tier LLMs, so children learn through natural conversation.",
+      "role": "Product & Project Manager",
+      "roleDetail": "One of the concurrent InfantAI product lines in my portfolio.",
+      "company": "PT InfantAI Teknologi Nusantara",
+      "year": "2025 — 2026",
+      "url": null,
+      "cover": "projects/genius-ai/devices.webp",
+      "coverAlt": "Genius AI devices in green dinosaur and pink bunny cases",
+      "theme": "light",
+      "metrics": [],
+      "modules": [
+        {
+          "title": "Embedded hardware",
+          "body": "A compact device with its own screen, dressed in playful cases."
+        },
+        {
+          "title": "Top-tier LLMs",
+          "body": "Conversations powered by leading large language models."
+        },
+        {
+          "title": "Built for children",
+          "body": "An engaging, child-friendly way to learn by talking."
+        }
+      ],
+      "flows": [],
+      "stories": [],
+      "gallery": []
+    }
+  ],
+  "experience": [
+    {
+      "company": "PT InfantAI Teknologi Nusantara",
+      "companyNote": "PT Nose Herbal Indo",
+      "role": "Product & Project Manager",
+      "location": "Shenzhen, Guangdong, China",
+      "start": "Sep 2025",
+      "end": "Present",
+      "summary": "AI-focused startup building digital products for parenting, early education and financial news — Infant.AI, GeniusAI and IFCNews.",
+      "points": [
+        "Led end-to-end software development — requirements, planning, development, QA, deployment and post-release optimization.",
+        "Managed a cross-functional team of 10 engineers and IT professionals across Frontend, Backend, QA, Business Analysis, Marketing, UI/UX and IT Support.",
+        "Defined product requirements, user stories, acceptance criteria, scope, milestones and backlogs from business requirements and technical feasibility.",
+        "Managed roadmaps, priorities, schedules, resources, risks and stakeholder communication across multiple concurrent projects.",
+        "Implemented Role-Based Access Control (RBAC) to enforce role-specific permissions.",
+        "Led the ERP implementation for Satglow Invent — multi-warehouse inventory and operational workflows.",
+        "Led a payment gateway implementation supporting multiple providers.",
+        "Migrated from Railway to self-managed VPS infrastructure, including the stack and database, while keeping the system available.",
+        "Cut monthly operating expenses from ~$150 to ~$50 through the VPS migration and LLM API token optimization.",
+        "Launched a freemium model to support marketing, user acquisition and conversion.",
+        "Drove product improvements from user feedback, business priorities, technical constraints and product performance.",
+        "Set up project monitoring and development workflows for visibility across engineering and cross-functional teams."
+      ]
+    },
+    {
+      "company": "PT Rekadia Solusi Teknologi",
+      "companyNote": null,
+      "role": "Project Manager",
+      "location": "AIA Central, Jakarta",
+      "start": "Apr 2026",
+      "end": "Aug 2026",
+      "summary": "Indonesian IT company specializing in software development, system integration and digital transformation.",
+      "points": [
+        "Managed software development projects from planning to deployment.",
+        "Coordinated with clients to gather and define business requirements.",
+        "Planned project schedules and monitored progress to ensure timely delivery.",
+        "Collaborated with developers, QA engineers, UI/UX and stakeholders throughout the project lifecycle.",
+        "Prepared project documentation and ensured deliverables met quality standards."
+      ]
+    },
+    {
+      "company": "PT Super Pasar Rakyat Indonesia",
+      "companyNote": "BRI Group",
+      "role": "Software Engineer",
+      "location": "Central Jakarta",
+      "start": "Feb 2025",
+      "end": "Oct 2025",
+      "summary": "PARI — BRI Group's digital marketplace for agricultural commodities, supporting farmers, breeders, fishermen and micro-entrepreneurs.",
+      "points": [
+        "Acted as a cross-functional intern across product management, project coordination, full-stack development and QA in Agile sprints.",
+        "Supported financial features — TopUp, Withdrawal and Settlement — with Laravel, MySQL, Docker and Redis.",
+        "Managed sprint tasks, timelines and communication across product, design and engineering.",
+        "Designed, tested and optimized modules through structured QA, performance tuning and user feedback analysis."
+      ]
+    },
+    {
+      "company": "Moodscape",
+      "companyNote": null,
+      "role": "IT Product & Project Manager",
+      "location": "South Jakarta",
+      "start": "Jan 2024",
+      "end": "Dec 2024",
+      "summary": "Kemendikbudristek-funded mental health innovation — an AI-powered app that monitors emotional well-being using graphology, facial recognition and machine learning.",
+      "points": [
+        "Led roadmap planning, feature prioritization, backlog management and sprint execution with Agile Scrum.",
+        "Worked with developers and UI/UX designers on machine-learning mood analysis features.",
+        "Ran usability testing with 50+ users to improve the product experience.",
+        "Tracked progress and requirements in Jira, Confluence and Notion.",
+        "Secured full funding from Kemendikbudristek and earned national recognition in mental health technology."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Universitas Siber Indonesia",
+      "degree": "Bachelor of Information Technology (S.Kom)",
+      "location": "TB Simatupang, South Jakarta",
+      "period": "Sep 2022 — Sep 2026",
+      "gpa": "3.97",
+      "honor": "Best Graduate",
+      "image": "education/graduation.webp",
+      "imageAlt": "Raden Issa at the Universitas Siber Indonesia graduation ceremony, wearing the Lulusan Terbaik (Best Graduate) sash and holding the award certificate, with his family",
+      "points": [
+        "Best Graduate (Wisudawan Terbaik) of the Information Technology program at the university's 4th graduation ceremony, with a 3.97 GPA.",
+        "Full-ride scholarship — 100% tuition for four years, awarded for academic performance and leadership.",
+        "1st Place, Cyber Entrepreneur Product Innovation Competition — a Raspberry Pi and Nextcloud private cloud for SMEs and households.",
+        "Published research on private cloud storage with OwnCloud and Ubuntu Linux (Google Scholar).",
+        "Published research on MSME growth prediction in West Java using linear regression (Google Scholar).",
+        "Designed an IoT environmental monitoring system with NodeMCU, gas and climate sensors for real-time hazard alerts.",
+        "Speaker at a Data Security Awareness Program for 50+ participants."
+      ]
+    }
+  ],
+  "organizations": [
+    {
+      "name": "Himpunan Mahasiswa Teknologi Informasi",
+      "role": "President",
+      "location": "Jakarta",
+      "period": "Jul 2023 — Present",
+      "summary": "Leading the Information Technology Student Association's academic and social programs.",
+      "points": [
+        "Organized company visits to XL Axiata and Allo Bank.",
+        "Led community service on digital literacy and cybersecurity awareness.",
+        "Brought members together through workshops, internal projects and networking events."
+      ]
+    },
+    {
+      "name": "Decompe 3.0",
+      "role": "IT Infrastructure",
+      "location": "Jakarta",
+      "period": "Aug 2023 — Jan 2024",
+      "summary": "A national UI/UX design competition organized by Cyber University.",
+      "points": [
+        "Ran IT infrastructure for 100+ participants from 10+ universities.",
+        "Kept 100% uptime through presentations and judging.",
+        "Built the registration and data system that sped up participant verification by 40%.",
+        "Resolved on-site and remote issues in about 5 minutes on average."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Golang Intermediate",
+      "issuer": "HackerRank",
+      "year": "2026"
+    },
+    {
+      "title": "Software Engineer",
+      "issuer": "HackerRank",
+      "year": "2026"
+    },
+    {
+      "title": "SQL (Advanced)",
+      "issuer": "HackerRank",
+      "year": "2025"
+    },
+    {
+      "title": "Cyber Security Awareness",
+      "issuer": "Professional certification",
+      "year": "2024"
+    },
+    {
+      "title": "Data Science",
+      "issuer": "Dicoding",
+      "year": "2024"
+    },
+    {
+      "title": "Intro to UX Research",
+      "issuer": "MySkill",
+      "year": "2024"
+    },
+    {
+      "title": "Product Management Bootcamp",
+      "issuer": "MySkill",
+      "year": "2024"
+    },
+    {
+      "title": "Data Science",
+      "issuer": "DQLab",
+      "year": "2024"
+    },
+    {
+      "title": "Web Development (Front End)",
+      "issuer": "Dibimbing.id",
+      "year": "2022"
+    }
+  ]
+}

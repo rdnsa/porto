@@ -1,0 +1,42 @@
+{
+  "name": "radenissa-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "wrangler pages dev dist --port 8788",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b && tsc -p functions/tsconfig.json",
+    "preview": "npm run build && wrangler pages dev dist --port 8788",
+    "media:extract": "python3 scripts/extract-pdf-images.py",
+    "media:cutout": "swift scripts/cutout.swift media-src/portrait.jpg media-src/portrait-cutout.png",
+    "media:build": "node scripts/build-media.mjs",
+    "media:upload": "node scripts/upload-media.mjs",
+    "media:upload:local": "node scripts/upload-media.mjs --local",
+    "db:migrate": "wrangler d1 migrations apply porto --remote",
+    "db:migrate:local": "wrangler d1 migrations apply porto --local",
+    "db:seed": "node scripts/build-seed.mjs && wrangler d1 execute porto --remote --file db/seed.sql -y",
+    "db:seed:local": "node scripts/build-seed.mjs && wrangler d1 execute porto --local --file db/seed.sql -y",
+    "db:messages": "wrangler d1 execute porto --remote --command \"SELECT id, created_at, name, email, message FROM messages ORDER BY id DESC LIMIT 20\"",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name radenissa --branch main --commit-dirty=true"
+  },
+  "dependencies": {
+    "lucide-react": "^1.48.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260925.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "wrangler": "^4.140.0"
+  }
+}

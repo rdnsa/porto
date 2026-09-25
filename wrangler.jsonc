@@ -1,0 +1,25 @@
+// Cloudflare Pages project: static SPA from ./dist + Pages Functions in ./functions.
+// Deploy with `npm run deploy` → https://radenissa.pages.dev
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "radenissa",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-09-01",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "porto",
+      "database_id": "e8e45c77-7353-4b41-9c9a-6134e79216ba",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "porto"
+    }
+  ],
+  "vars": {
+    "SITE_URL": "https://radenissa.pages.dev"
+  }
+}
