@@ -542,13 +542,13 @@
       "category": "AI · Campus facilities",
       "tagline": "Toilet reports that go straight to the cleaning staff.",
       "summary": "A campus toilet-reporting app for UPI Tasikmalaya: students scan a QR code on the door to report, cleaning staff close the reports, and an AI chatbot answers questions about the data.",
-      "description": "A web app for the Universitas Pendidikan Indonesia Tasikmalaya campus. Students report a dirty or broken toilet by scanning the QR code on its door, with no sign-in and no name needed. Reports go straight to the cleaning staff, every report’s status is public, and supervisors can ask an AI chatbot about the data in plain language.",
+      "description": "A web app for the Universitas Pendidikan Indonesia Tasikmalaya campus. Students report a dirty or broken toilet by scanning the QR code on its door, with no sign-in and no name needed. Reports go straight to the cleaning staff, every report’s status is public, and supervisors can ask an AI chatbot about the data in plain language. In short, it works much like JakLapor in Jakarta’s JAKI app, but for a campus.",
       "role": "Product & Project Manager",
       "roleDetail": "Defined the product for three roles — students, cleaning staff and supervisors — from the QR reporting flow to the AI analytics.",
       "company": null,
       "year": "2026",
       "url": "https://ai-complaint.yvrtz.workers.dev",
-      "cover": "projects/kato-report/home.webp",
+      "cover": "projects/kato-report/home-dark.webp",
       "coverAlt": "Kato Report home: choose your role as student, cleaning staff or supervisor",
       "coverFocus": "start",
       "theme": "dark",
@@ -586,12 +586,12 @@
       "stories": [],
       "gallery": [
         {
-          "src": "projects/kato-report/map.webp",
+          "src": "projects/kato-report/map-dark.webp",
           "alt": "UPI Tasikmalaya building map with lettered buildings",
           "caption": "Building map and floor picker, for toilets whose QR sticker is missing."
         },
         {
-          "src": "projects/kato-report/reports.webp",
+          "src": "projects/kato-report/reports-dark.webp",
           "alt": "Incoming reports page showing 3 of 4 reports resolved and a low-priority report card",
           "caption": "Public report tracker with status and priority filters."
         }
@@ -1258,7 +1258,7 @@
           "category": "AI · Fasilitas kampus",
           "tagline": "Laporan toilet yang langsung sampai ke petugas kebersihan.",
           "summary": "Aplikasi laporan toilet kampus untuk UPI Tasikmalaya: mahasiswa memindai QR di pintu untuk melapor, petugas kebersihan menuntaskan laporan, dan chatbot AI menjawab pertanyaan seputar data.",
-          "description": "Aplikasi web untuk Universitas Pendidikan Indonesia Kampus Tasikmalaya. Mahasiswa melaporkan toilet yang kotor atau rusak cukup dengan memindai kode QR di pintunya, tanpa login dan tanpa nama. Laporan langsung sampai ke petugas kebersihan, status setiap laporan terbuka untuk umum, dan pengawas bisa bertanya ke chatbot AI tentang data dengan bahasa sehari-hari.",
+          "description": "Aplikasi web untuk Universitas Pendidikan Indonesia Kampus Tasikmalaya. Mahasiswa melaporkan toilet yang kotor atau rusak cukup dengan memindai kode QR di pintunya, tanpa login dan tanpa nama. Laporan langsung sampai ke petugas kebersihan, status setiap laporan terbuka untuk umum, dan pengawas bisa bertanya ke chatbot AI tentang data dengan bahasa sehari-hari. Singkatnya, sistem ini kurang lebih seperti JakLapor di aplikasi JAKI, tetapi untuk lingkungan kampus.",
           "roleDetail": "Merancang produk untuk tiga peran — mahasiswa, petugas kebersihan, dan pengawas — dari alur pelaporan lewat QR hingga analitik AI.",
           "coverAlt": "Beranda Kato Report: pilih peran sebagai mahasiswa, petugas kebersihan, atau pengawas",
           "modules": [
@@ -1293,12 +1293,12 @@
           ],
           "gallery": [
             {
-              "src": "projects/kato-report/map.webp",
+              "src": "projects/kato-report/map-dark.webp",
               "alt": "Peta gedung UPI Tasikmalaya dengan huruf tiap gedung",
               "caption": "Peta gedung dan pilihan lantai, untuk toilet yang stiker QR-nya hilang."
             },
             {
-              "src": "projects/kato-report/reports.webp",
+              "src": "projects/kato-report/reports-dark.webp",
               "alt": "Halaman laporan masuk: 3 dari 4 laporan selesai dan kartu laporan prioritas rendah",
               "caption": "Pelacak laporan publik dengan filter status dan prioritas."
             }
