@@ -10,10 +10,8 @@ const out = (key) => path.join(root, "media", key);
 
 // crop: region to keep (drops browser chrome, taskbars and scrollbars from the screenshots).
 const jobs = [
-  // Office photo: the square crop is the search-result portrait; the cut-out (background removed,
-  // chair kept, colour and sharpness corrected) is the hero figure.
-  { key: "profile/portrait-office.webp", from: "portrait-office.png", crop: { left: 330, top: 36, width: 662, height: 662 }, quality: 82 },
-  { key: "profile/portrait-office-chair.webp", from: "portrait-office-chair-cutout.png", width: 1024, quality: 88, alpha: true },
+  { key: "profile/portrait.webp", from: "portrait.jpg", width: 1024, quality: 82 },
+  { key: "profile/portrait-cutout.webp", from: "portrait-cutout.png", width: 1024, quality: 88, alpha: true },
   { key: "education/graduation.webp", from: "graduation.jpg", width: 1600, quality: 80 },
   { key: "about/itb-gig-economy.webp", from: "pdf/itb-event.png", width: 1600, quality: 78 },
   { key: "projects/ifc-news/home.webp", from: "pdf/ifc-home.png", crop: { left: 0, top: 33, width: 794, height: 381 } },
@@ -55,13 +53,13 @@ const text = `
   <text x="72" y="508" class="display" font-size="26" font-weight="400" fill="#707070">Driving projects, products &amp; growth.</text>
   <rect x="72" y="548" width="128" height="4" rx="2" fill="#0071e3"/>
 </svg>`;
-const portrait = await sharp(src("portrait-office-chair-cutout.png")).resize({ height: 620 }).png().toBuffer();
-await mkdir(path.dirname(out("og/cover-office.jpg")), { recursive: true });
+const portrait = await sharp(src("portrait-cutout.png")).resize({ height: 600 }).png().toBuffer();
+await mkdir(path.dirname(out("og/cover.jpg")), { recursive: true });
 await sharp({ create: { ...og, channels: 3, background: "#f5f5f7" } })
   .composite([
     { input: Buffer.from(text), left: 0, top: 0 },
-    { input: portrait, left: 600, top: og.height - 620 },
+    { input: portrait, left: 640, top: og.height - 600 },
   ])
   .jpeg({ quality: 86, mozjpeg: true })
-  .toFile(out("og/cover-office.jpg"));
-console.log("og/cover-office.jpg                          1200x630");
+  .toFile(out("og/cover.jpg"));
+console.log("og/cover.jpg                                 1200x630");

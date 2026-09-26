@@ -11,11 +11,11 @@
     "email": "rdnsa123@gmail.com",
     "availability": "Have a product to ship or a team to lead? Let's talk.",
     "currentCompany": "PT InfantAI Teknologi Nusantara",
-    "portrait": "profile/portrait-office.webp",
-    "portraitCutout": "profile/portrait-office-chair.webp",
+    "portrait": "profile/portrait.webp",
+    "portraitCutout": "profile/portrait-cutout.webp",
     "aboutImage": "about/itb-gig-economy.webp",
     "aboutImageCaption": "Aula Timur ITB, Bandung — launch of Pelatihan GIG Economy & the AI Open Innovation Challenge, January 2026.",
-    "ogImage": "og/cover-office.jpg",
+    "ogImage": "og/cover.jpg",
     "resume": null
   },
   "socials": [

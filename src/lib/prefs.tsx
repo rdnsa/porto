@@ -39,7 +39,7 @@ const PreferencesContext = createContext<Preferences | null>(null);
 /** Language and colour theme, remembered per browser. index.html applies both before first paint. */
 export function PreferencesProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Locale>(() => stored("lang", LOCALES, "en"));
-  const [theme, setTheme] = useState<Theme>(() => stored<Theme>("theme", ["light", "dark"], "dark"));
+  const [theme, setTheme] = useState<Theme>(() => stored<Theme>("theme", ["light", "dark"], "light"));
 
   useEffect(() => {
     document.documentElement.lang = lang;
