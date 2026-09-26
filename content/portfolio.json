@@ -598,14 +598,14 @@
   ],
   "education": [
     {
-      "school": "Universitas Siber Indonesia",
+      "school": "Cyber University",
       "degree": "Bachelor of Information Technology (S.Kom)",
       "location": "TB Simatupang, South Jakarta",
       "period": "Sep 2022 — Sep 2026",
       "gpa": "3.97",
       "honor": "Best Graduate",
       "image": "education/graduation.webp",
-      "imageAlt": "Raden Issa at the Universitas Siber Indonesia graduation ceremony, wearing the Lulusan Terbaik (Best Graduate) sash and holding the award certificate, with his family",
+      "imageAlt": "Raden Issa at the Cyber University graduation ceremony, wearing the Lulusan Terbaik (Best Graduate) sash and holding the award certificate, with his family",
       "points": [
         "Best Graduate (Wisudawan Terbaik) of the Information Technology program at the university's 4th graduation ceremony, with a 3.97 GPA.",
         "Full-ride scholarship — 100% tuition for four years, awarded for academic performance and leadership.",
@@ -700,7 +700,7 @@
     {
       "src": "moments/graduation-confetti.webp",
       "alt": "Raden Issa on stage in a graduation gown holding his award certificate under falling confetti",
-      "caption": "Receiving the Best Graduate award at Universitas Siber Indonesia's 4th graduation ceremony."
+      "caption": "Receiving the Best Graduate award at Cyber University's 4th graduation ceremony."
     },
     {
       "src": "moments/pari-office.webp",
@@ -1214,7 +1214,8 @@
             "Menerbitkan riset prediksi pertumbuhan UMKM di Jawa Barat dengan regresi linear (Google Scholar).",
             "Merancang sistem pemantauan lingkungan berbasis IoT dengan NodeMCU, sensor gas dan iklim, untuk peringatan bahaya real-time.",
             "Pembicara di Program Kesadaran Keamanan Data untuk 50+ peserta."
-          ]
+          ],
+          "school": "Universitas Siber Indonesia"
         }
       ],
       "organizations": [
@@ -1230,7 +1231,7 @@
         },
         {
           "period": "Agu 2023 — Jan 2024",
-          "summary": "Kompetisi desain UI/UX tingkat nasional yang diselenggarakan Cyber University.",
+          "summary": "Kompetisi desain UI/UX tingkat nasional yang diselenggarakan Universitas Siber Indonesia.",
           "points": [
             "Mengelola infrastruktur IT untuk 100+ peserta dari 10+ universitas.",
             "Menjaga uptime 100% selama presentasi dan penjurian.",

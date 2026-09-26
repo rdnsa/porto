@@ -40,7 +40,7 @@ const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - 2 ** (-10 * t));
  * written straight to the text node, so the count never re-renders React.
  */
 function CountUp({ value }: { value: string }) {
-  const match = /^([^d]*)(d+(?:.d+)?)(.*)$/.exec(value);
+  const match = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/.exec(value);
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
