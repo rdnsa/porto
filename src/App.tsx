@@ -13,8 +13,10 @@ import { Journey } from "./components/Journey";
 import { Moments } from "./components/Moments";
 import { Quote } from "./components/Quote";
 import { Work } from "./components/Work";
-import { localize, usePreferences } from "./lib/prefs";
+import { localize } from "../shared/localize";
+import { usePreferences } from "./lib/prefs";
 import { useCaseRoute } from "./lib/useCaseRoute";
+import { useInPageLinks } from "./lib/useInPageLinks";
 import { usePortfolio } from "./lib/usePortfolio";
 
 export default function App() {
@@ -27,19 +29,7 @@ export default function App() {
   const project = portfolio?.projects.find((p) => p.slug === route.slug) ?? null;
   const caseOpen = project !== null;
 
-  // "#top" links (name, Back to top) scroll up without leaving "#top" in the address bar.
-  useEffect(() => {
-    if (location.hash === "#top") history.replaceState(history.state, "", location.pathname + location.search);
-    const onClick = (event: MouseEvent) => {
-      const link = (event.target as Element | null)?.closest?.('a[href="#top"]');
-      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      if (location.hash) history.replaceState(history.state, "", location.pathname + location.search);
-    };
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
-  }, []);
+  useInPageLinks(portfolio !== null);
 
   // Unknown /work/:slug (renamed or unpublished in D1): fall back to the home page.
   useEffect(() => {
@@ -62,7 +52,7 @@ export default function App() {
           <Ownership skills={portfolio.skills} role={profile.role} tagline={profile.tagline} />
           <Work projects={portfolio.projects} onOpen={(slug) => route.open(slug)} />
           <Journey experience={portfolio.experience} />
-          <Moments moments={portfolio.moments ?? []} />
+          <Moments moments={portfolio.moments} />
           <Education
             education={portfolio.education}
             organizations={portfolio.organizations}

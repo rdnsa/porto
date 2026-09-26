@@ -1,6 +1,6 @@
-import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import { type CSSProperties, type ReactNode, useEffect, useRef } from "react";
 import { useScrollVar } from "../lib/scroll";
+import { observeViewport } from "../lib/viewport";
 
 /** Renders **bold** markers from the content as <strong>. */
 export function Rich({ text }: { text: string }) {
@@ -36,10 +36,9 @@ export function Reveal({
   stagger?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  // The side the content last left through, so it comes back in from the same side.
-  const [from, setFrom] = useState<"below" | "above">("below");
 
+  // Visibility lives in data attributes written straight to the DOM (data-visible, and data-from
+  // for the side it last left through), so scrolling never re-renders React.
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
@@ -48,38 +47,32 @@ export function Reveal({
       node.style.setProperty("--n", String(items.length));
       items.forEach((item, i) => item.style.setProperty("--i", String(i)));
     }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    return observeViewport(
+      node,
+      (entry) => {
         const side = entry.boundingClientRect.top < 0 ? "above" : "below";
         if (!entry.isIntersecting) {
-          setVisible(false);
-          setFrom(side);
+          delete node.dataset.visible;
+          node.dataset.from = side;
           return;
         }
-        if (node.dataset.from !== side) {
+        if ((node.dataset.from ?? "below") !== side) {
           // Jumped straight past it (anchor link, fast fling), so it is still parked on the other
           // side: move it to the side it is really entering from without animating that move.
           node.dataset.snap = "";
-          flushSync(() => setFrom(side));
+          node.dataset.from = side;
           void node.offsetWidth;
           delete node.dataset.snap;
         }
-        setVisible(true);
+        node.dataset.visible = "";
       },
-      { rootMargin: "0px 0px -8% 0px" },
+      "0px 0px -8% 0px",
     );
-    observer.observe(node);
-    return () => observer.disconnect();
   }, [stagger]);
 
   const style = delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined;
   return (
-    <div
-      ref={ref}
-      data-from={from}
-      className={`${stagger ? "reveal-stagger" : "reveal"} ${visible ? "is-visible" : ""} ${className}`}
-      style={style}
-    >
+    <div ref={ref} className={`${stagger ? "reveal-stagger" : "reveal"} ${className}`} style={style}>
       {children}
     </div>
   );

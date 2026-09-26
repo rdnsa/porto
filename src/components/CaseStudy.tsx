@@ -1,10 +1,10 @@
 import { ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { type MouseEvent, useEffect, useRef, useState } from "react";
-import type { Project } from "../../shared/types";
+import type { Project, Story } from "../../shared/types";
 import { media } from "../lib/media";
 import { useBodyScrollLock } from "../lib/useBodyScrollLock";
-import { useDialog } from "../lib/useDialog";
 import { useT } from "../lib/prefs";
+import { useDialog } from "../lib/useDialog";
 import { Rich } from "./ui";
 
 const METRIC_COLUMNS = ["", "md:grid-cols-1", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-4"];
@@ -180,38 +180,13 @@ export function CaseStudy({
           )}
 
           {current.stories.map((story, s) => (
-            <section key={story.title} aria-labelledby={`story-${s}`} className="page">
-              <div
-                className={`py-16 sm:py-24 ${s > 0 || current.flows.length > 0 ? "border-t border-hairline-silver" : ""}`}
-              >
-              <p className="text-kicker text-slate">
-                {current.stories.length > 1 ? t("case.chapter", { n: s + 1 }) : t("case.theStory")}
-              </p>
-              <h2 id={`story-${s}`} className="mt-3 text-headline">
-                {story.title}.
-              </h2>
-              <div className="mt-12 grid gap-10 md:grid-cols-3">
-                <Column title={t("case.challenge")} items={story.challenge} />
-                <Column title={t("case.responsibilities")} items={story.responsibilities} />
-                <Column title={t("case.initiatives")} items={story.initiatives} />
-              </div>
-              <div className="mt-12 rounded-card bg-studio-mist p-7 sm:p-10">
-                <h3 className="text-subtitle">{t("case.impact")}</h3>
-                <ol className="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-3">
-                  {story.impact.map((item, i) => (
-                    <li key={item} className="flex gap-4">
-                      <span aria-hidden className="font-display text-title text-steel">
-                        {i + 1}
-                      </span>
-                      <p className="text-body text-ink/80">
-                        <Rich text={item} />
-                      </p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-              </div>
-            </section>
+            <StoryChapter
+              key={story.title}
+              story={story}
+              id={`story-${s}`}
+              label={current.stories.length > 1 ? t("case.chapter", { n: s + 1 }) : t("case.theStory")}
+              divided={s > 0 || current.flows.length > 0}
+            />
           ))}
 
           {current.gallery.length > 0 && (
@@ -259,6 +234,41 @@ export function CaseStudy({
         </article>
       </div>
     </div>
+  );
+}
+
+/** One challenge → work → impact story, set under a kicker ("The story" or "Chapter n"). */
+function StoryChapter({ story, id, label, divided }: { story: Story; id: string; label: string; divided: boolean }) {
+  const t = useT();
+  return (
+    <section aria-labelledby={id} className="page">
+      <div className={`py-16 sm:py-24 ${divided ? "border-t border-hairline-silver" : ""}`}>
+        <p className="text-kicker text-slate">{label}</p>
+        <h2 id={id} className="mt-3 text-headline">
+          {story.title}.
+        </h2>
+        <div className="mt-12 grid gap-10 md:grid-cols-3">
+          <Column title={t("case.challenge")} items={story.challenge} />
+          <Column title={t("case.responsibilities")} items={story.responsibilities} />
+          <Column title={t("case.initiatives")} items={story.initiatives} />
+        </div>
+        <div className="mt-12 rounded-card bg-studio-mist p-7 sm:p-10">
+          <h3 className="text-subtitle">{t("case.impact")}</h3>
+          <ol className="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-3">
+            {story.impact.map((item, i) => (
+              <li key={item} className="flex gap-4">
+                <span aria-hidden className="font-display text-title text-steel">
+                  {i + 1}
+                </span>
+                <p className="text-body text-ink/80">
+                  <Rich text={item} />
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
   );
 }
 

@@ -28,7 +28,6 @@
 
   --font-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue ME", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-text: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue ME", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-hn: "Helvetica Neue ME", Helvetica, Arial, sans-serif;
   --font-sans: var(--font-text);
 
   /* Type scale (DESIGN.md), fluid where the reference jumps between breakpoints. */
@@ -40,10 +39,6 @@
   --text-headline--line-height: 1.08;
   --text-headline--letter-spacing: -0.005em;
   --text-headline--font-weight: 600;
-  --text-section: clamp(1.75rem, 1.4rem + 1.3vw, 2.5rem);
-  --text-section--line-height: 1.1;
-  --text-section--letter-spacing: 0em;
-  --text-section--font-weight: 600;
   --text-title: 1.75rem;
   --text-title--line-height: 1.14;
   --text-title--letter-spacing: 0.007em;
@@ -74,7 +69,6 @@
   --text-control--letter-spacing: -0.01em;
 
   --radius-card: 28px;
-  --radius-nav: 20px;
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
@@ -156,12 +150,6 @@
   max-width: calc(var(--content) + var(--gutter) * 2);
   margin-inline: auto;
   padding-inline: var(--gutter);
-}
-
-/* Horizontal padding that lines a full-bleed scroller up with the .page content edge. */
-@utility bleed {
-  padding-inline: max(var(--gutter), calc((100% - var(--content)) / 2));
-  scroll-padding-inline: max(var(--gutter), calc((100% - var(--content)) / 2));
 }
 
 @utility no-scrollbar {
@@ -255,12 +243,12 @@
     opacity 0.8s var(--ease-out-quint),
     transform 0.8s var(--ease-out-quint);
 }
-.reveal.is-visible,
-.reveal-stagger.is-visible > * {
+.reveal[data-visible],
+.reveal-stagger[data-visible] > * {
   opacity: 1;
   transform: none;
 }
-.reveal.is-visible {
+.reveal[data-visible] {
   transition-delay: var(--reveal-delay, 0ms);
 }
 /* Children follow each other 70ms apart; coming from above, the bottom one leads. */
@@ -270,7 +258,7 @@
 .reveal-stagger[data-from="above"] > * {
   --order: calc(var(--n, 1) - 1 - var(--i, 0));
 }
-.reveal-stagger.is-visible > * {
+.reveal-stagger[data-visible] > * {
   transition-delay: calc(var(--reveal-delay, 0ms) + var(--order) * 70ms);
 }
 .reveal[data-snap],

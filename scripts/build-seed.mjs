@@ -61,6 +61,7 @@ const statements = [
       url: pr.url,
       cover_key: pr.cover,
       cover_alt: pr.coverAlt,
+      cover_focus: pr.coverFocus ?? "start",
       theme: pr.theme,
       metrics: pr.metrics,
       modules: pr.modules,

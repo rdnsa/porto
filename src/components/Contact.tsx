@@ -1,7 +1,7 @@
 import { ArrowUpRight, Check } from "lucide-react";
 import { type FormEvent, useState } from "react";
 import type { Profile, Social } from "../../shared/types";
-import { MESSAGES, type MessageKey } from "../lib/i18n";
+import { type ContactResponse, isContactErrorCode } from "../../shared/contact";
 import { useT } from "../lib/prefs";
 import { Reveal } from "./ui";
 
@@ -26,10 +26,10 @@ export function Contact({ profile, socials }: { profile: Profile; socials: Socia
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      const result = (await response.json().catch(() => ({}))) as { error?: string; code?: string };
-      if (!response.ok) {
-        const key = `contact.error.${result.code}` as MessageKey;
-        throw new Error(result.code && key in MESSAGES.en ? t(key) : (result.error ?? t("contact.error.generic")));
+      const result = (await response.json().catch(() => null)) as ContactResponse | null;
+      if (!response.ok || !result?.ok) {
+        const code = result && !result.ok && isContactErrorCode(result.code) ? result.code : "generic";
+        throw new Error(t(`contact.error.${code}`));
       }
       form.reset();
       setStatus({ state: "sent" });

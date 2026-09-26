@@ -77,6 +77,8 @@ export interface Project {
   url: string | null;
   cover: string;
   coverAlt: string;
+  /** Part of the cover shown on the Work card: top-left (dashboards) or centre (heroes, photos). */
+  coverFocus: "start" | "center";
   theme: "light" | "dark";
   metrics: Stat[];
   modules: Module[];

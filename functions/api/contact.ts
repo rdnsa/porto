@@ -1,3 +1,4 @@
+import type { ContactErrorCode, ContactResponse } from "../../shared/contact";
 import type { Env } from "../../server/portfolio";
 
 const LIMITS = { name: 120, email: 200, message: 4000 };
@@ -5,7 +6,9 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MAX_PER_WINDOW = 3; // messages per IP per 10 minutes
 
 // `code` lets the page show the message in the visitor's language; `error` is the English fallback.
-const fail = (status: number, error: string, code = "generic") => Response.json({ ok: false, error, code }, { status });
+const fail = (status: number, error: string, code: ContactErrorCode = "generic") =>
+  Response.json({ ok: false, code, error } satisfies ContactResponse, { status });
+const accepted = () => Response.json({ ok: true } satisfies ContactResponse, { status: 201 });
 
 const field = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
 
@@ -29,7 +32,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   // Honeypot: real visitors never see the "company" field, bots fill it in. Pretend it worked.
-  if (field(body.company, 200)) return Response.json({ ok: true }, { status: 201 });
+  if (field(body.company, 200)) return accepted();
 
   const name = field(body.name, LIMITS.name);
   const email = field(body.email, LIMITS.email);
@@ -61,7 +64,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     )
     .run();
 
-  return Response.json({ ok: true }, { status: 201 });
+  return accepted();
 };
 
 export const onRequest: PagesFunction<Env> = () =>

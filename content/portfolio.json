@@ -132,6 +132,7 @@
       "url": "https://ifcnews.id",
       "cover": "projects/ifc-news/home.webp",
       "coverAlt": "IFC News homepage: Indonesian markets, decoded by AI",
+      "coverFocus": "center",
       "theme": "dark",
       "metrics": [
         {
@@ -257,6 +258,7 @@
       "url": null,
       "cover": "projects/satglow-erp/dashboard.webp",
       "coverAlt": "Satglow ERP warehouse dashboard",
+      "coverFocus": "start",
       "theme": "light",
       "metrics": [],
       "modules": [
@@ -318,6 +320,7 @@
       "url": "https://nordpartners.id",
       "cover": "projects/nordpartners/home.webp",
       "coverAlt": "NordPartners homepage: strategic access to Australian property and investment opportunities",
+      "coverFocus": "center",
       "theme": "dark",
       "metrics": [
         {
@@ -392,6 +395,7 @@
       "url": null,
       "cover": "projects/nose-one/dashboard.webp",
       "coverAlt": "NOSE ONE HRIS dashboard",
+      "coverFocus": "start",
       "theme": "light",
       "metrics": [],
       "modules": [
@@ -440,6 +444,7 @@
       "url": null,
       "cover": "projects/aix-expo/home.webp",
       "coverAlt": "AIX Indonesia homepage: Indonesia's premier AI Summit",
+      "coverFocus": "center",
       "theme": "dark",
       "metrics": [],
       "modules": [
@@ -497,6 +502,7 @@
       "url": null,
       "cover": "projects/genius-ai/devices.webp",
       "coverAlt": "Genius AI devices in green dinosaur and pink bunny cases",
+      "coverFocus": "center",
       "theme": "light",
       "metrics": [],
       "modules": [
@@ -704,7 +710,7 @@
     {
       "src": "moments/video-shoot.webp",
       "alt": "Raden Issa being filmed talking about AI in the back seat of a car, seen through a camera monitor",
-      "caption": "On camera, talking about AI in a video shoot."
+      "caption": "On camera, talking about AI and product & project management in a video shoot."
     },
     {
       "src": "moments/itb-class.webp",
@@ -1260,7 +1266,7 @@
         {
           "src": "moments/video-shoot.webp",
           "alt": "Raden Issa direkam sedang membahas AI di kursi belakang mobil, terlihat melalui monitor kamera",
-          "caption": "Di depan kamera, membahas AI dalam sebuah syuting video."
+          "caption": "Di depan kamera, membahas AI serta product & project management dalam sesi syuting video."
         },
         {
           "src": "moments/itb.webp",

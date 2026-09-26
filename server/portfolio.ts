@@ -36,6 +36,7 @@ function toProject(row: Row): Project {
     url: optional(row.url),
     cover: text(row.cover_key),
     coverAlt: text(row.cover_alt),
+    coverFocus: row.cover_focus === "center" ? "center" : "start",
     theme: row.theme === "dark" ? "dark" : "light",
     metrics: json(row.metrics),
     modules: json(row.modules),

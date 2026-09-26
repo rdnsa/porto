@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { Stat } from "../../shared/types";
 import { useT } from "../lib/prefs";
 import { Reveal, SectionHeading } from "./ui";
@@ -36,18 +36,22 @@ const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - 2 ** (-10 * t));
 
 /**
  * Counts the numeric part of a stat ("224k", "−66%", "~3 wks", "3.97") up from zero whenever it
- * comes into view, and resets once it is fully off screen so scrolling back replays it.
+ * comes into view, and resets once it is fully off screen so scrolling back replays it. Frames are
+ * written straight to the text node, so the count never re-renders React.
  */
 function CountUp({ value }: { value: string }) {
-  const match = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/.exec(value);
+  const match = /^([^d]*)(d+(?:.d+)?)(.*)$/.exec(value);
   const ref = useRef<HTMLSpanElement>(null);
-  // Start at zero (hidden by the section reveal anyway) so the final value never flashes first.
-  const [current, setCurrent] = useState<number | null>(() => (match ? 0 : null));
 
   useEffect(() => {
     const node = ref.current;
     if (!match || !node) return;
-    const target = Number(match[2]);
+    const [, prefix, number, suffix] = match;
+    const target = Number(number);
+    const decimals = number.split(".")[1]?.length ?? 0;
+    const show = (n: number) => {
+      node.textContent = `${prefix}${n.toFixed(decimals)}${suffix}`;
+    };
     let frame = 0;
     let played = false;
     const observer = new IntersectionObserver(
@@ -55,7 +59,7 @@ function CountUp({ value }: { value: string }) {
         if (!entry.isIntersecting) {
           cancelAnimationFrame(frame);
           played = false;
-          setCurrent(0);
+          show(0);
           return;
         }
         if (played || entry.intersectionRatio < 0.3) return;
@@ -63,10 +67,9 @@ function CountUp({ value }: { value: string }) {
         const start = performance.now();
         const tick = (now: number) => {
           const t = Math.min(1, (now - start) / DURATION);
-          setCurrent(target * easeOutExpo(t));
+          show(target * easeOutExpo(t));
           if (t < 1) frame = requestAnimationFrame(tick);
         };
-        setCurrent(0);
         frame = requestAnimationFrame(tick);
       },
       { threshold: [0, 0.3] },
@@ -81,15 +84,15 @@ function CountUp({ value }: { value: string }) {
 
   if (!match) return <>{value}</>;
   const [, prefix, number, suffix] = match;
-  const decimals = number.split(".")[1]?.length ?? 0;
-  const shown = current === null ? number : current.toFixed(decimals);
+  const zero = (0).toFixed(number.split(".")[1]?.length ?? 0);
 
   return (
-    <span ref={ref}>
+    <span>
       <span className="sr-only">{value}</span>
-      <span aria-hidden>
+      {/* Starts at zero (hidden by the section reveal anyway) so the final value never flashes first. */}
+      <span ref={ref} aria-hidden>
         {prefix}
-        {shown}
+        {zero}
         {suffix}
       </span>
     </span>

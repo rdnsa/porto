@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Pause, Play, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import {
   type KeyboardEvent,
   type MouseEvent,
@@ -10,21 +10,18 @@ import {
   useState,
 } from "react";
 import type { Project } from "../../shared/types";
-import { media } from "../lib/media";
 import { useT } from "../lib/prefs";
-import { prefersReducedMotion } from "../lib/scroll";
+import { glideScroll } from "../lib/scroll";
+import { ProjectCard } from "./ProjectCard";
 import { Reveal, SectionHeading } from "./ui";
 
 const GAP = 20;
 const SLIDE_MS = 2000;
 const DRAG_THRESHOLD = 6;
 
-// Covers whose subject sits in the middle of the frame (a hero, a product photo). They keep the same
-// bleed-off-the-right-edge placement as the dashboards, but the visible window is cut from their centre.
-const CENTRED_COVERS = new Set(["ifc-news", "aix-expo", "genius-ai", "nordpartners"]);
-
 /**
- * DESIGN.md "Highlights Stage": a Studio Mist band with a sideways run of 28px media cards.
+ * DESIGN.md "Highlights Stage": a Studio Mist band with a sideways run of 28px media cards, the
+ * current one centred on screen (the side padding is half the viewport minus half a card).
  * Advances on its own (paused while hovered, focused, dragged or off-screen), swipes on touch,
  * drags with a mouse, and answers the arrow keys.
  */
@@ -33,6 +30,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
   const section = useRef<HTMLElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef({ active: false, moved: false, startX: 0, startScroll: 0 });
+  const cancelGlide = useRef<() => void>(() => {});
   const [index, setIndex] = useState(0);
   const [atEnd, setAtEnd] = useState(false);
   // Always starts playing (every 2s); the pause button is there for anyone who wants it still.
@@ -92,9 +90,14 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
   }, []);
 
   const go = (target: number) => {
+    const node = scroller.current;
+    if (!node) return;
     const clamped = Math.max(0, Math.min(projects.length - 1, target));
-    scroller.current?.scrollTo({ left: clamped * step(), behavior: prefersReducedMotion() ? "auto" : "smooth" });
+    cancelGlide.current();
+    cancelGlide.current = glideScroll(node, clamped * step());
   };
+
+  useEffect(() => () => cancelGlide.current(), []);
 
   const advance = () => go(atEnd ? 0 : index + 1);
 
@@ -106,6 +109,8 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
 
   // Mouse drag-to-scroll (touch and trackpads already scroll natively).
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    // Any touch or click takes over from a glide in progress.
+    cancelGlide.current();
     const node = scroller.current;
     if (event.pointerType !== "mouse" || event.button !== 0 || !node) return;
     drag.current = { active: true, moved: false, startX: event.clientX, startScroll: node.scrollLeft };
@@ -138,8 +143,6 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
     // Flick direction wins over position, so a short drag still turns the page.
     const base = state.startScroll / Math.max(step(), 1);
     const target = Math.abs(dx) > 60 ? Math.round(base) + (dx < 0 ? 1 : -1) : Math.round(node.scrollLeft / step());
-    node.style.scrollSnapType = "";
-    node.style.scrollBehavior = "";
     go(target);
     setDragging(false);
   };
@@ -195,52 +198,18 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
           onPointerLeave={() => setHovered(false)}
           onFocus={() => setFocused(true)}
           onBlur={(event) => !event.currentTarget.contains(event.relatedTarget) && setFocused(false)}
-          className={`bleed no-scrollbar mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-2 focus-visible:outline-offset-8 lg:mt-16 ${dragging ? "cursor-grabbing select-none" : "md:cursor-grab"}`}
+          className={`no-scrollbar mt-12 flex snap-x px-[calc(50%-min(42vw,200px))] sm:px-[calc(50%-200px)] snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-2 focus-visible:outline-offset-8 lg:mt-16 ${dragging ? "cursor-grabbing select-none" : "md:cursor-grab"}`}
         >
-          {projects.map((project, i) => {
-            const dark = project.theme === "dark";
-            return (
-              <article
-                key={project.slug}
-                aria-roledescription="slide"
-                aria-label={t("work.slideLabel", { index: i + 1, total: projects.length, name: project.name })}
-                className={`group relative flex h-[520px] w-[84vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-card transition-transform duration-500 ease-out-quint sm:h-[580px] sm:w-[400px] short:h-[440px] ${dark ? "bg-black text-white dark:bg-[#2a2a2c]" : "bg-gallery-white text-ink"} ${dragging ? "" : "hover:-translate-y-1"}`}
-              >
-                <span
-                  aria-hidden
-                  className={`absolute right-5 top-5 z-10 grid size-9 place-items-center rounded-full transition-[transform,background-color] duration-500 ease-out-quint group-hover:rotate-90 sm:right-6 sm:top-6 ${dark ? "bg-white/15 text-white group-hover:bg-white/25" : "bg-black/[0.06] text-ink group-hover:bg-black/[0.12] dark:bg-white/10 dark:group-hover:bg-white/20"}`}
-                >
-                  <Plus size={18} strokeWidth={2} />
-                </span>
-                <div className="p-7 pr-16 sm:p-9 sm:pr-16">
-                  <p className={`text-control font-semibold ${dark ? "text-white/60" : "text-slate"}`}>{project.category}</p>
-                  <h3 className="mt-2 text-title">{project.name}</h3>
-                  <p className={`mt-3 line-clamp-4 text-body short:line-clamp-2 ${dark ? "text-white/75" : "text-ink/75"}`}>
-                    {project.summary}
-                  </p>
-                  <a
-                    href={`/work/${project.slug}`}
-                    onClick={(event) => openCase(event, project.slug)}
-                    draggable={false}
-                    className={`mt-4 inline-block text-body after:absolute after:inset-0 after:content-[''] group-hover:underline ${dark ? "text-apple-blue-dark" : "text-apple-blue"}`}
-                  >
-                    {t("work.viewCase")} <span aria-hidden>›</span>
-                  </a>
-                </div>
-                <div className="relative mt-auto h-[42%]">
-                  <img
-                    src={media(project.cover)}
-                    alt={project.coverAlt}
-                    loading="lazy"
-                    draggable={false}
-                    className={CENTRED_COVERS.has(project.slug)
-                      ? `absolute -bottom-2 -right-3 left-7 top-0 h-[calc(100%+0.5rem)] w-[calc(100%-1.75rem+0.75rem)] max-w-none rounded-tl-[18px] object-cover object-center transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 sm:w-[calc(100%-2.25rem+0.75rem)] ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5 dark:ring-white/10"}`
-                      : `absolute left-7 top-0 w-[150%] max-w-none rounded-tl-[18px] transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5 dark:ring-white/10"}`}
-                  />
-                </div>
-              </article>
-            );
-          })}
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              position={i + 1}
+              total={projects.length}
+              interactive={!dragging}
+              onOpen={openCase}
+            />
+          ))}
         </div>
       </Reveal>
 

@@ -7,7 +7,7 @@ import { NAV } from "../lib/nav";
 import { useT } from "../lib/prefs";
 import { BluePill } from "./ui";
 
-const EASE = "ease-[cubic-bezier(0.76,0,0.24,1)]";
+const EASE = "ease-in-out-quart";
 
 /** Three bars that morph into an X. Sits above the drawer (z-50), aligned with the hero header. */
 export function MenuButton({ open, onToggle, inert }: { open: boolean; onToggle: () => void; inert?: boolean }) {

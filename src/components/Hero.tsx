@@ -55,13 +55,11 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
       >
         {/* Two identical halves (two names each, so ultra-wide screens never show a gap). */}
         <div style={nameExit} className="will-change-transform">
-        <div className="marquee flex w-max whitespace-nowrap font-display text-[16vh] font-semibold leading-none tracking-[-0.045em] text-ink sm:text-[26vh]">
-          {[0, 1, 2, 3].map((i) => (
-            <span key={i}>
-              {name}
-            </span>
-          ))}
-        </div>
+          <div className="marquee flex w-max whitespace-nowrap font-display text-[16vh] font-semibold leading-none tracking-[-0.045em] text-ink sm:text-[26vh]">
+            {[0, 1, 2, 3].map((i) => (
+              <span key={i}>{name}</span>
+            ))}
+          </div>
         </div>
       </div>
 
