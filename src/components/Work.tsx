@@ -19,6 +19,10 @@ const GAP = 20;
 const SLIDE_MS = 2000;
 const DRAG_THRESHOLD = 6;
 
+// Covers whose subject sits in the middle of the frame (a hero, a product photo). They keep the same
+// bleed-off-the-right-edge placement as the dashboards, but the visible window is cut from their centre.
+const CENTRED_COVERS = new Set(["ifc-news", "aix-expo", "genius-ai", "nordpartners"]);
+
 /**
  * DESIGN.md "Highlights Stage": a Studio Mist band with a sideways run of 28px media cards.
  * Advances on its own (paused while hovered, focused, dragged or off-screen), swipes on touch,
@@ -229,7 +233,9 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
                     alt={project.coverAlt}
                     loading="lazy"
                     draggable={false}
-                    className={`absolute left-7 top-0 w-[150%] max-w-none rounded-tl-[18px] transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5 dark:ring-white/10"}`}
+                    className={CENTRED_COVERS.has(project.slug)
+                      ? `absolute -bottom-2 -right-3 left-7 top-0 h-[calc(100%+0.5rem)] w-[calc(100%-1.75rem+0.75rem)] max-w-none rounded-tl-[18px] object-cover object-center transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 sm:w-[calc(100%-2.25rem+0.75rem)] ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5 dark:ring-white/10"}`
+                      : `absolute left-7 top-0 w-[150%] max-w-none rounded-tl-[18px] transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5 dark:ring-white/10"}`}
                   />
                 </div>
               </article>
