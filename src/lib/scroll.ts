@@ -40,21 +40,17 @@ export const prefersReducedMotion = () =>
 
 /**
  * Writes a 0–1 scroll progress into a CSS custom property on the element, so styles can
- * interpolate with calc() without React re-rendering on every frame.
+ * interpolate with calc() without React re-rendering on every frame. It runs regardless of
+ * prefers-reduced-motion, like the scroll reveals.
  */
 export function useScrollVar(
   ref: RefObject<HTMLElement | null>,
   progress: (rect: DOMRect, viewportHeight: number) => number,
   name = "--p",
-  reducedMotionValue = 1,
 ) {
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    if (prefersReducedMotion()) {
-      node.style.setProperty(name, String(reducedMotionValue));
-      return;
-    }
     let last = -1;
     return subscribe(() => {
       const value = Math.round(clamp01(progress(node.getBoundingClientRect(), window.innerHeight)) * 1000) / 1000;
@@ -64,5 +60,5 @@ export function useScrollVar(
       }
     });
     // `progress` is expected to be a stable module-level function, so it is not a dependency.
-  }, [ref, name, reducedMotionValue]);
+  }, [ref, name]);
 }

@@ -1,17 +1,19 @@
 import { Compass, SquareKanban, TrendingUp } from "lucide-react";
 import type { SkillGroup } from "../../shared/types";
+import { useT } from "../lib/prefs";
 import { Reveal, SectionHeading } from "./ui";
 
 const ICONS = [SquareKanban, Compass, TrendingUp];
 
 export function Ownership({ skills, role, tagline }: { skills: SkillGroup[]; role: string; tagline: string }) {
+  const t = useT();
   const core = skills.filter((group) => group.kind === "core");
   const tools = skills.filter((group) => group.kind === "tools");
 
   return (
     <section aria-labelledby="ownership-title" className="bg-gallery-white py-[90px] sm:py-32">
       <div className="page">
-        <SectionHeading id="ownership-title" kicker="Core ownership" title={`${role}.`} aside={tagline} />
+        <SectionHeading id="ownership-title" kicker={t("ownership.kicker")} title={`${role}.`} aside={tagline} />
 
         <div className="mt-12 grid gap-5 md:grid-cols-3 lg:mt-16">
           {core.map((group, i) => {

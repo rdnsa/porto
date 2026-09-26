@@ -1,5 +1,6 @@
 import type { Certification, Education as School, Organization } from "../../shared/types";
 import { media } from "../lib/media";
+import { useT } from "../lib/prefs";
 import { Reveal, SectionHeading } from "./ui";
 
 export function Education({
@@ -11,10 +12,11 @@ export function Education({
   organizations: Organization[];
   certifications: Certification[];
 }) {
+  const t = useT();
   return (
     <section aria-labelledby="education-title" className="bg-studio-mist py-[90px] sm:py-32">
       <div className="page">
-        <SectionHeading id="education-title" kicker="Education & recognition" title="Always learning." aside="Then leading others through it." />
+        <SectionHeading id="education-title" kicker={t("education.kicker")} title={t("education.title")} aside={t("education.aside")} />
 
         <div className="mt-12 grid gap-5 lg:mt-16 lg:grid-cols-12">
           {education.map((school) => (
@@ -39,7 +41,7 @@ export function Education({
                   </div>
                   <p className="text-right">
                     <span className="block font-display text-[4rem] font-semibold leading-none tracking-[-0.035em]">{school.gpa}</span>
-                    <span className="mt-1 block text-body-sm text-slate">GPA / 4.00</span>
+                    <span className="mt-1 block text-body-sm text-slate">{t("education.gpa")}</span>
                   </p>
                 </div>
                 <ul className="mt-8 space-y-3 border-t border-hairline-silver pt-6 text-body text-ink/80">
@@ -79,7 +81,7 @@ export function Education({
         {certifications.length > 0 && (
           <Reveal className="mt-5">
             <article className="rounded-card bg-gallery-white p-7 sm:p-10">
-              <h3 className="text-subtitle">Certifications</h3>
+              <h3 className="text-subtitle">{t("education.certifications")}</h3>
               <ul className="mt-6 grid gap-x-10 lg:grid-cols-2">
                 {certifications.map((cert) => (
                   <li

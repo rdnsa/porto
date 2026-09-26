@@ -20,7 +20,11 @@ export function usePortfolio() {
     let cancelled = false;
     (async () => {
       try {
-        const response = await fetch("/api/portfolio", { headers: { Accept: "application/json" } });
+        // Time-boxed: a stuck API (e.g. a hung `wrangler pages dev` behind Vite's proxy) must not leave a blank page.
+        const response = await fetch("/api/portfolio", {
+          headers: { Accept: "application/json" },
+          signal: AbortSignal.timeout(5000),
+        });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = (await response.json()) as Portfolio;
         if (!cancelled) setPortfolio(data);

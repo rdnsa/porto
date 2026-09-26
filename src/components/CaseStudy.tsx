@@ -4,6 +4,7 @@ import type { Project } from "../../shared/types";
 import { media } from "../lib/media";
 import { useBodyScrollLock } from "../lib/useBodyScrollLock";
 import { useDialog } from "../lib/useDialog";
+import { useT } from "../lib/prefs";
 import { Rich } from "./ui";
 
 const METRIC_COLUMNS = ["", "md:grid-cols-1", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-4"];
@@ -24,6 +25,7 @@ export function CaseStudy({
   onClose: () => void;
   onNavigate: (slug: string) => void;
 }) {
+  const t = useT();
   const [current, setCurrent] = useState(project);
   const dialog = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
@@ -65,15 +67,15 @@ export function CaseStudy({
         ref={scroller}
         className={`h-full overflow-y-auto overscroll-contain bg-gallery-white transition-transform duration-700 ease-out-quint ${open ? "translate-y-0" : "translate-y-10"}`}
       >
-        <div className="sticky top-0 z-10 border-b border-black/10 bg-paper-frost/80 backdrop-blur-xl backdrop-saturate-150">
+        <div className="sticky top-0 z-10 border-b border-black/10 bg-paper-frost/80 backdrop-blur-xl dark:border-white/10 backdrop-saturate-150">
           <div className="page flex h-13 items-center justify-between gap-4">
             <p className="truncate font-display text-nav-title">{current.name}</p>
             <button
               type="button"
               onClick={onClose}
               data-autofocus
-              aria-label="Close case study"
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-[#e8e8ed] text-ink/70 transition-colors duration-300 hover:bg-[#dcdce0] hover:text-ink"
+              aria-label={t("case.close")}
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-[#e8e8ed] text-ink/70 transition-colors duration-300 hover:bg-[#dcdce0] hover:text-ink dark:bg-[#333336] dark:hover:bg-[#424245]"
             >
               <X size={18} strokeWidth={2} />
             </button>
@@ -92,12 +94,12 @@ export function CaseStudy({
             <p className="mt-8 max-w-[60ch] text-lead text-ink/85">{current.description}</p>
 
             <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-hairline-silver pt-6 md:grid-cols-4">
-              <Meta label="Role" value={current.role} />
-              {current.company && <Meta label="Company" value={current.company} />}
-              {current.year && <Meta label="Year" value={current.year} />}
+              <Meta label={t("case.role")} value={current.role} />
+              {current.company && <Meta label={t("case.company")} value={current.company} />}
+              {current.year && <Meta label={t("case.year")} value={current.year} />}
               {current.url && (
                 <div>
-                  <dt className="text-control text-slate">Live</dt>
+                  <dt className="text-control text-slate">{t("case.live")}</dt>
                   <dd className="mt-1 text-body">
                     <a
                       href={current.url}
@@ -119,12 +121,12 @@ export function CaseStudy({
             <img
               src={media(current.cover)}
               alt={current.coverAlt}
-              className="scroll-zoom w-full rounded-card ring-1 ring-black/5"
+              className="scroll-zoom w-full rounded-card ring-1 ring-black/5 dark:ring-white/10"
             />
           </figure>
 
           {current.metrics.length > 0 && (
-            <section aria-label="Results" className="page mt-16 sm:mt-24">
+            <section aria-label={t("case.results")} className="page mt-16 sm:mt-24">
               <div className={`grid grid-cols-2 gap-x-8 gap-y-10 ${METRIC_COLUMNS[Math.min(current.metrics.length, 4)]}`}>
                 {current.metrics.map((metric) => (
                   <div key={metric.label} className="border-t border-hairline-silver pt-5">
@@ -142,7 +144,7 @@ export function CaseStudy({
             <section aria-labelledby="modules-title" className="mt-16 bg-studio-mist py-[90px] sm:mt-24">
               <div className="page">
                 <h2 id="modules-title" className="text-headline">
-                  What it does.
+                  {t("case.whatItDoes")}
                 </h2>
                 <div className="mt-10 grid gap-5 md:grid-cols-2">
                   {current.modules.map((module, i) => (
@@ -158,7 +160,7 @@ export function CaseStudy({
           )}
 
           {current.flows.length > 0 && (
-            <section aria-label="How it connects" className="page space-y-12 py-16 sm:py-24">
+            <section aria-label={t("case.howItConnects")} className="page space-y-12 py-16 sm:py-24">
               {current.flows.map((flow) => (
                 <div key={flow.title}>
                   <h2 className="text-kicker">{flow.title}</h2>
@@ -183,18 +185,18 @@ export function CaseStudy({
                 className={`py-16 sm:py-24 ${s > 0 || current.flows.length > 0 ? "border-t border-hairline-silver" : ""}`}
               >
               <p className="text-kicker text-slate">
-                {current.stories.length > 1 ? `Chapter ${s + 1}` : "The story"}
+                {current.stories.length > 1 ? t("case.chapter", { n: s + 1 }) : t("case.theStory")}
               </p>
               <h2 id={`story-${s}`} className="mt-3 text-headline">
                 {story.title}.
               </h2>
               <div className="mt-12 grid gap-10 md:grid-cols-3">
-                <Column title="Challenge" items={story.challenge} />
-                <Column title="Responsibilities" items={story.responsibilities} />
-                <Column title="Initiatives" items={story.initiatives} />
+                <Column title={t("case.challenge")} items={story.challenge} />
+                <Column title={t("case.responsibilities")} items={story.responsibilities} />
+                <Column title={t("case.initiatives")} items={story.initiatives} />
               </div>
               <div className="mt-12 rounded-card bg-studio-mist p-7 sm:p-10">
-                <h3 className="text-subtitle">Impact</h3>
+                <h3 className="text-subtitle">{t("case.impact")}</h3>
                 <ol className="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-3">
                   {story.impact.map((item, i) => (
                     <li key={item} className="flex gap-4">
@@ -216,7 +218,7 @@ export function CaseStudy({
             <section aria-labelledby="gallery-title" className="bg-studio-mist py-[90px]">
               <div className="page">
                 <h2 id="gallery-title" className="text-headline">
-                  Behind the work.
+                  {t("case.behindTheWork")}
                 </h2>
                 <div className="mt-10 grid gap-5 md:grid-cols-2">
                   {current.gallery.map((image) => (
@@ -244,12 +246,12 @@ export function CaseStudy({
                 onClick={goNext}
                 className="group block rounded-card bg-studio-mist p-7 transition-colors duration-300 hover:bg-control-gray sm:p-10"
               >
-                <p className="text-control text-slate">Next project</p>
+                <p className="text-control text-slate">{t("case.nextProject")}</p>
                 <p className="mt-2 max-w-[26ch] text-headline">
                   {next.name}. <span className="text-steel">{next.tagline}</span>
                 </p>
                 <span className="mt-6 inline-flex items-center gap-1 text-body text-apple-blue group-hover:underline">
-                  View case study <span aria-hidden>›</span>
+                  {t("work.viewCase")} <span aria-hidden>›</span>
                 </span>
               </a>
             </footer>

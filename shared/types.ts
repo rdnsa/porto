@@ -123,6 +123,23 @@ export interface Certification {
   year: string;
 }
 
+/** A photo in the "Moments" gallery. */
+export interface Moment {
+  src: string;
+  alt: string;
+  caption: string | null;
+}
+
+export type Locale = "en" | "id";
+
+/**
+ * A partial copy of the portfolio in another language. Arrays line up with the English ones by
+ * `slug`/`src` where items have one, otherwise by position; untranslated fields fall back to English.
+ */
+export type Translation = { [K in keyof Omit<Portfolio, "translations">]?: DeepPartial<Portfolio[K]> };
+
+type DeepPartial<T> = T extends (infer U)[] ? DeepPartial<U>[] : T extends object ? { [K in keyof T]?: DeepPartial<T[K]> } : T;
+
 export interface Portfolio {
   profile: Profile;
   socials: Social[];
@@ -133,4 +150,6 @@ export interface Portfolio {
   education: Education[];
   organizations: Organization[];
   certifications: Certification[];
+  moments: Moment[];
+  translations?: Partial<Record<Exclude<Locale, "en">, Translation>>;
 }

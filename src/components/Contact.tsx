@@ -1,6 +1,8 @@
 import { ArrowUpRight, Check } from "lucide-react";
 import { type FormEvent, useState } from "react";
 import type { Profile, Social } from "../../shared/types";
+import { MESSAGES, type MessageKey } from "../lib/i18n";
+import { useT } from "../lib/prefs";
 import { Reveal } from "./ui";
 
 type Status = { state: "idle" | "sending" | "sent" } | { state: "error"; message: string };
@@ -10,6 +12,7 @@ const FIELD =
   "w-full border border-steel bg-gallery-white px-6 py-3.5 text-body text-ink placeholder:text-steel transition-[border-color,box-shadow] duration-300 focus:border-pricing-blue focus:shadow-[0_0_0_3px_rgba(0,113,227,0.25)] focus:outline-none";
 
 export function Contact({ profile, socials }: { profile: Profile; socials: Social[] }) {
+  const t = useT();
   const [status, setStatus] = useState<Status>({ state: "idle" });
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -23,14 +26,17 @@ export function Contact({ profile, socials }: { profile: Profile; socials: Socia
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      const result = (await response.json().catch(() => ({}))) as { error?: string };
-      if (!response.ok) throw new Error(result.error ?? "Something went wrong. Please try again.");
+      const result = (await response.json().catch(() => ({}))) as { error?: string; code?: string };
+      if (!response.ok) {
+        const key = `contact.error.${result.code}` as MessageKey;
+        throw new Error(result.code && key in MESSAGES.en ? t(key) : (result.error ?? t("contact.error.generic")));
+      }
       form.reset();
       setStatus({ state: "sent" });
     } catch (error) {
       setStatus({
         state: "error",
-        message: error instanceof TypeError ? "You seem to be offline. Please try again." : (error as Error).message,
+        message: error instanceof TypeError ? t("contact.error.offline") : (error as Error).message,
       });
     }
   }
@@ -38,10 +44,10 @@ export function Contact({ profile, socials }: { profile: Profile; socials: Socia
   return (
     <section id="contact" aria-labelledby="contact-title" className="bg-gallery-white py-[90px] sm:py-32">
       <div className="page grid gap-14 lg:grid-cols-12 lg:gap-10">
-        <Reveal className="lg:col-span-6">
-          <p className="text-kicker text-slate">Contact</p>
+        <Reveal stagger className="lg:col-span-6">
+          <p className="text-kicker text-slate">{t("contact.kicker")}</p>
           <h2 id="contact-title" className="mt-3 max-w-[14ch] text-display">
-            Let&rsquo;s build what&rsquo;s next.
+            {t("contact.title")}
           </h2>
           <p className="mt-6 max-w-[40ch] text-lead text-pretty text-slate">{profile.availability}</p>
           <a
@@ -72,34 +78,34 @@ export function Contact({ profile, socials }: { profile: Profile; socials: Socia
 
         <Reveal className="lg:col-span-6" delay={120}>
           <form onSubmit={submit} className="rounded-card bg-studio-mist p-7 sm:p-10">
-            <h3 className="text-subtitle">Send a message</h3>
-            <p className="mt-2 text-body-sm text-slate">I read every message and reply by email.</p>
+            <h3 className="text-subtitle">{t("contact.formTitle")}</h3>
+            <p className="mt-2 text-body-sm text-slate">{t("contact.formNote")}</p>
 
             <div className="mt-8 space-y-5">
               <label className="block">
-                <span className="mb-2 block text-control font-semibold">Name</span>
-                <input name="name" required maxLength={120} autoComplete="name" placeholder="Your name" className={`${FIELD} rounded-[980px]`} />
+                <span className="mb-2 block text-control font-semibold">{t("contact.name")}</span>
+                <input name="name" required maxLength={120} autoComplete="name" placeholder={t("contact.namePlaceholder")} className={`${FIELD} rounded-[980px]`} />
               </label>
               <label className="block">
-                <span className="mb-2 block text-control font-semibold">Email</span>
+                <span className="mb-2 block text-control font-semibold">{t("contact.email")}</span>
                 <input
                   name="email"
                   type="email"
                   required
                   maxLength={200}
                   autoComplete="email"
-                  placeholder="you@company.com"
+                  placeholder={t("contact.emailPlaceholder")}
                   className={`${FIELD} rounded-[980px]`}
                 />
               </label>
               <label className="block">
-                <span className="mb-2 block text-control font-semibold">Message</span>
+                <span className="mb-2 block text-control font-semibold">{t("contact.message")}</span>
                 <textarea
                   name="message"
                   required
                   maxLength={4000}
                   rows={5}
-                  placeholder="What are you building?"
+                  placeholder={t("contact.messagePlaceholder")}
                   className={`${FIELD} resize-y rounded-[20px] leading-[1.47]`}
                 />
               </label>
@@ -113,12 +119,12 @@ export function Contact({ profile, socials }: { profile: Profile; socials: Socia
                 disabled={status.state === "sending"}
                 className="rounded-full bg-pricing-blue px-6 py-3 text-body-sm text-white transition-colors duration-300 hover:bg-[#0077ed] disabled:opacity-60"
               >
-                {status.state === "sending" ? "Sending…" : "Send message"}
+                {status.state === "sending" ? t("contact.sending") : t("contact.send")}
               </button>
               <p aria-live="polite" className="text-body-sm">
                 {status.state === "sent" && (
                   <span className="inline-flex items-center gap-1.5 text-ink">
-                    <Check size={16} strokeWidth={2} className="text-[#1d8a4b]" /> Thanks — your message is in.
+                    <Check size={16} strokeWidth={2} className="text-[#1d8a4b]" /> {t("contact.sent")}
                   </span>
                 )}
                 {status.state === "error" && <span className="text-launch-orange">{status.message}</span>}

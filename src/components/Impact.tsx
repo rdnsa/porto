@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import type { Stat } from "../../shared/types";
-import { prefersReducedMotion } from "../lib/scroll";
+import { useT } from "../lib/prefs";
 import { Reveal, SectionHeading } from "./ui";
 
 /** The one dark chapter: outcomes set large in cream on black. */
 export function Impact({ stats }: { stats: Stat[] }) {
+  const t = useT();
   if (!stats.length) return null;
   return (
-    <section aria-labelledby="impact-title" className="bg-black py-[90px] text-cream sm:py-32">
+    <section aria-labelledby="impact-title" className="bg-black py-[90px] text-cream sm:py-32 dark:bg-studio-mist">
       <div className="page">
-        <SectionHeading id="impact-title" kicker="Impact" title="Outcomes, not output." aside="The numbers behind the work." tone="dark" />
+        <SectionHeading id="impact-title" kicker={t("impact.kicker")} title={t("impact.title")} aside={t("impact.aside")} tone="dark" />
         <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 md:gap-x-8 md:gap-y-12 lg:mt-20">
           {stats.map((stat, i) => (
             <Reveal key={stat.label} delay={(i % 3) * 90} className="group border-t border-cream/15 pt-6">
@@ -33,22 +34,32 @@ export function Impact({ stats }: { stats: Stat[] }) {
 const DURATION = 1600;
 const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - 2 ** (-10 * t));
 
-/** Counts the numeric part of a stat ("224k", "−66%", "~3 wks", "3.97") up from zero once in view. */
+/**
+ * Counts the numeric part of a stat ("224k", "−66%", "~3 wks", "3.97") up from zero whenever it
+ * comes into view, and resets once it is fully off screen so scrolling back replays it.
+ */
 function CountUp({ value }: { value: string }) {
   const match = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/.exec(value);
   const ref = useRef<HTMLSpanElement>(null);
   // Start at zero (hidden by the section reveal anyway) so the final value never flashes first.
-  const [current, setCurrent] = useState<number | null>(() => (match && !prefersReducedMotion() ? 0 : null));
+  const [current, setCurrent] = useState<number | null>(() => (match ? 0 : null));
 
   useEffect(() => {
     const node = ref.current;
-    if (!match || !node || prefersReducedMotion()) return;
+    if (!match || !node) return;
     const target = Number(match[2]);
     let frame = 0;
+    let played = false;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
+        if (!entry.isIntersecting) {
+          cancelAnimationFrame(frame);
+          played = false;
+          setCurrent(0);
+          return;
+        }
+        if (played || entry.intersectionRatio < 0.3) return;
+        played = true;
         const start = performance.now();
         const tick = (now: number) => {
           const t = Math.min(1, (now - start) / DURATION);
@@ -58,7 +69,7 @@ function CountUp({ value }: { value: string }) {
         setCurrent(0);
         frame = requestAnimationFrame(tick);
       },
-      { threshold: 0.3 },
+      { threshold: [0, 0.3] },
     );
     observer.observe(node);
     return () => {

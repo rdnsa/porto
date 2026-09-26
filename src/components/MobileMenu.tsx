@@ -4,18 +4,20 @@ import type { Social } from "../../shared/types";
 import { useBodyScrollLock } from "../lib/useBodyScrollLock";
 import { useDialog } from "../lib/useDialog";
 import { NAV } from "../lib/nav";
+import { useT } from "../lib/prefs";
 import { BluePill } from "./ui";
 
 const EASE = "ease-[cubic-bezier(0.76,0,0.24,1)]";
 
 /** Three bars that morph into an X. Sits above the drawer (z-50), aligned with the hero header. */
 export function MenuButton({ open, onToggle, inert }: { open: boolean; onToggle: () => void; inert?: boolean }) {
+  const t = useT();
   return (
     <button
       type="button"
       onClick={onToggle}
       inert={inert}
-      aria-label={open ? "Close menu" : "Open menu"}
+      aria-label={t(open ? "nav.closeMenu" : "nav.openMenu")}
       aria-expanded={open}
       aria-controls="mobile-menu"
       className="anim-fade-up absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center sm:hidden short:!flex"
@@ -39,6 +41,7 @@ export function MenuButton({ open, onToggle, inert }: { open: boolean; onToggle:
 const stagger = (open: boolean, ms: number) => ({ transitionDelay: open ? `${ms}ms` : "0ms" });
 
 export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose: () => void; socials: Social[] }) {
+  const t = useT();
   const panel = useRef<HTMLDivElement>(null);
   useBodyScrollLock(open);
   useDialog(panel, open, onClose);
@@ -55,13 +58,13 @@ export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose:
         ref={panel}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label={t("nav.menu")}
         className={`fixed inset-y-0 right-0 z-40 flex w-[80%] max-w-sm flex-col border-l border-control-gray overflow-y-auto bg-paper-frost/95 px-8 py-10 short:py-6 backdrop-blur-xl transition-transform duration-[600ms] ${EASE} ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close menu"
+          aria-label={t("nav.closeMenu")}
           data-autofocus
           className={`absolute right-6 top-6 text-ink transition-[transform,opacity] duration-500 ${open ? "rotate-0 opacity-100 delay-300" : "rotate-90 opacity-0"}`}
         >
@@ -72,9 +75,9 @@ export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose:
           className={`mt-14 short:mt-8 text-control text-slate transition-[transform,opacity] duration-700 ease-out-quint ${shown || "translate-y-4 opacity-0"}`}
           style={stagger(open, 250)}
         >
-          Site index
+          {t("nav.siteIndex")}
         </p>
-        <nav className="mt-4 flex flex-col gap-2" aria-label="Site index">
+        <nav className="mt-4 flex flex-col gap-2" aria-label={t("nav.siteIndex")}>
           {NAV.map((item, i) => (
             <a
               key={item.href}
@@ -83,7 +86,7 @@ export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose:
               className={`font-display text-4xl font-semibold tracking-[-0.02em] transition-[transform,opacity] duration-700 ease-out-quint ${shown || "translate-y-6 opacity-0"}`}
               style={stagger(open, 300 + i * 80)}
             >
-              {item.label}
+              {t(item.key)}
             </a>
           ))}
         </nav>
@@ -93,7 +96,7 @@ export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose:
             className={`text-control text-slate transition-[transform,opacity] duration-700 ease-out-quint ${shown || "translate-y-4 opacity-0"}`}
             style={stagger(open, 500)}
           >
-            Find me
+            {t("nav.findMe")}
           </p>
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {socials.map((social, i) => (
@@ -115,7 +118,7 @@ export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose:
             className={`mt-8 px-5 py-2 text-sm transition-[transform,opacity,background-color] duration-700 ease-out-quint ${shown || "translate-y-4 opacity-0"}`}
             style={stagger(open, 550 + socials.length * 60)}
           >
-            Let&rsquo;s talk
+            {t("nav.letsTalk")}
           </BluePill>
         </div>
       </div>

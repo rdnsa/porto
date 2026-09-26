@@ -11,6 +11,7 @@ import {
 } from "react";
 import type { Project } from "../../shared/types";
 import { media } from "../lib/media";
+import { useT } from "../lib/prefs";
 import { prefersReducedMotion } from "../lib/scroll";
 import { Reveal, SectionHeading } from "./ui";
 
@@ -24,12 +25,14 @@ const DRAG_THRESHOLD = 6;
  * drags with a mouse, and answers the arrow keys.
  */
 export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug: string) => void }) {
+  const t = useT();
   const section = useRef<HTMLElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef({ active: false, moved: false, startX: 0, startScroll: 0 });
   const [index, setIndex] = useState(0);
   const [atEnd, setAtEnd] = useState(false);
-  const [playing, setPlaying] = useState(() => !prefersReducedMotion());
+  // Always starts playing (every 2s); the pause button is there for anyone who wants it still.
+  const [playing, setPlaying] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [dragging, setDragging] = useState(false);
@@ -164,12 +167,12 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
       <div className="page flex items-end justify-between gap-8">
         <SectionHeading
           id="work-title"
-          kicker="Work"
-          title="Projects highlight."
-          aside={`${projects.length} products, from ERP to AI hardware.`}
+          kicker={t("work.kicker")}
+          title={t("work.title")}
+          aside={t("work.aside", { count: projects.length })}
         />
         <a href="#contact" className="mb-2 hidden shrink-0 text-body text-apple-blue hover:underline md:inline">
-          Start a conversation ›
+          {t("work.startConversation")}
         </a>
       </div>
 
@@ -177,7 +180,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
         <div
           ref={scroller}
           tabIndex={0}
-          aria-label="Projects — use the arrow keys to browse"
+          aria-label={t("work.carouselLabel")}
           onKeyDown={onKeyDown}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
@@ -196,12 +199,12 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
               <article
                 key={project.slug}
                 aria-roledescription="slide"
-                aria-label={`${i + 1} of ${projects.length}: ${project.name}`}
-                className={`group relative flex h-[520px] w-[84vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-card transition-transform duration-500 ease-out-quint sm:h-[580px] sm:w-[400px] short:h-[440px] ${dark ? "bg-black text-white" : "bg-gallery-white text-ink"} ${dragging ? "" : "hover:-translate-y-1"}`}
+                aria-label={t("work.slideLabel", { index: i + 1, total: projects.length, name: project.name })}
+                className={`group relative flex h-[520px] w-[84vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-card transition-transform duration-500 ease-out-quint sm:h-[580px] sm:w-[400px] short:h-[440px] ${dark ? "bg-black text-white dark:bg-[#2a2a2c]" : "bg-gallery-white text-ink"} ${dragging ? "" : "hover:-translate-y-1"}`}
               >
                 <span
                   aria-hidden
-                  className={`absolute right-5 top-5 z-10 grid size-9 place-items-center rounded-full transition-[transform,background-color] duration-500 ease-out-quint group-hover:rotate-90 sm:right-6 sm:top-6 ${dark ? "bg-white/15 text-white group-hover:bg-white/25" : "bg-black/[0.06] text-ink group-hover:bg-black/[0.12]"}`}
+                  className={`absolute right-5 top-5 z-10 grid size-9 place-items-center rounded-full transition-[transform,background-color] duration-500 ease-out-quint group-hover:rotate-90 sm:right-6 sm:top-6 ${dark ? "bg-white/15 text-white group-hover:bg-white/25" : "bg-black/[0.06] text-ink group-hover:bg-black/[0.12] dark:bg-white/10 dark:group-hover:bg-white/20"}`}
                 >
                   <Plus size={18} strokeWidth={2} />
                 </span>
@@ -217,7 +220,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
                     draggable={false}
                     className={`mt-4 inline-block text-body after:absolute after:inset-0 after:content-[''] group-hover:underline ${dark ? "text-apple-blue-dark" : "text-apple-blue"}`}
                   >
-                    View case study <span aria-hidden>›</span>
+                    {t("work.viewCase")} <span aria-hidden>›</span>
                   </a>
                 </div>
                 <div className="relative mt-auto h-[42%]">
@@ -226,7 +229,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
                     alt={project.coverAlt}
                     loading="lazy"
                     draggable={false}
-                    className={`absolute left-7 top-0 w-[150%] max-w-none rounded-tl-[18px] transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5"}`}
+                    className={`absolute left-7 top-0 w-[150%] max-w-none rounded-tl-[18px] transition-transform duration-700 ease-out-quint group-hover:-translate-x-3 group-hover:-translate-y-2 sm:left-9 ${dark ? "ring-1 ring-white/10" : "ring-1 ring-black/5 dark:ring-white/10"}`}
                   />
                 </div>
               </article>
@@ -236,38 +239,38 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
       </Reveal>
 
       <div className="page mt-8 flex items-center justify-center gap-3">
-        <CarouselButton label="Previous project" disabled={index === 0} onClick={() => go(index - 1)} className="hidden sm:grid">
+        <CarouselButton label={t("work.previous")} disabled={index === 0} onClick={() => go(index - 1)} className="hidden sm:grid">
           <ChevronLeft size={20} strokeWidth={2} />
         </CarouselButton>
-        <div className="flex h-11 items-center gap-2.5 rounded-[36px] bg-[rgba(210,210,215,0.64)] px-5 backdrop-blur-md">
+        <div className="flex h-11 items-center gap-2.5 rounded-[36px] bg-[rgba(210,210,215,0.64)] px-5 backdrop-blur-md dark:bg-[rgba(66,66,69,0.72)]">
           {projects.map((project, i) => (
             <button
               key={project.slug}
               type="button"
               onClick={() => go(i)}
-              aria-label={`Show ${project.name}`}
+              aria-label={t("work.show", { name: project.name })}
               aria-current={i === index ? "true" : undefined}
-              className={`relative h-2 overflow-hidden rounded-full transition-all duration-500 ease-out-quint before:absolute before:-inset-3 before:content-[''] ${i === index ? "w-8 bg-black/20" : "w-2 bg-black/25 hover:bg-black/40"}`}
+              className={`relative h-2 overflow-hidden rounded-full transition-all duration-500 ease-out-quint before:absolute before:-inset-3 before:content-[''] ${i === index ? "w-8 bg-black/20 dark:bg-white/20" : "w-2 bg-black/25 hover:bg-black/40 dark:bg-white/30 dark:hover:bg-white/50"}`}
             >
               {i === index &&
                 (playing ? (
                   <span
                     key={`${index}-${atEnd}`}
                     onAnimationEnd={advance}
-                    className="dot-fill absolute inset-0 rounded-full bg-black/60"
+                    className="dot-fill absolute inset-0 rounded-full bg-black/60 dark:bg-white/85"
                     style={{ animationPlayState: running ? "running" : "paused", ["--dot-duration" as string]: `${SLIDE_MS}ms` }}
                   />
                 ) : (
-                  <span className="absolute inset-0 rounded-full bg-black/60" />
+                  <span className="absolute inset-0 rounded-full bg-black/60 dark:bg-white/85" />
                 ))}
             </button>
           ))}
         </div>
-        <CarouselButton label="Next project" disabled={atEnd} onClick={() => go(index + 1)} className="hidden sm:grid">
+        <CarouselButton label={t("work.next")} disabled={atEnd} onClick={() => go(index + 1)} className="hidden sm:grid">
           <ChevronRight size={20} strokeWidth={2} />
         </CarouselButton>
         <CarouselButton
-          label={playing ? "Pause autoplay" : "Play autoplay"}
+          label={t(playing ? "work.pause" : "work.play")}
           onClick={() => setPlaying((value) => !value)}
         >
           {playing ? <Pause size={16} strokeWidth={2} fill="currentColor" /> : <Play size={16} strokeWidth={2} fill="currentColor" />}
@@ -296,7 +299,7 @@ function CarouselButton({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className={`size-11 place-items-center rounded-full bg-[rgba(210,210,215,0.64)] text-black/60 backdrop-blur-md transition-[opacity,background-color,transform] duration-300 hover:bg-[rgba(210,210,215,0.9)] active:scale-95 disabled:opacity-35 ${className}`}
+      className={`size-11 place-items-center rounded-full bg-[rgba(210,210,215,0.64)] text-black/60 backdrop-blur-md transition-[opacity,background-color,transform] duration-300 hover:bg-[rgba(210,210,215,0.9)] dark:bg-[rgba(66,66,69,0.72)] dark:text-white/80 dark:hover:bg-[rgba(86,86,90,0.9)] active:scale-95 disabled:opacity-35 ${className}`}
     >
       {children}
     </button>

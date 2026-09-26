@@ -1,7 +1,10 @@
+import { ArrowUp } from "lucide-react";
 import type { Profile, Social } from "../../shared/types";
 import { NAV } from "../lib/nav";
+import { useT } from "../lib/prefs";
 
 export function Footer({ profile, socials }: { profile: Profile; socials: Social[] }) {
+  const t = useT();
   return (
     <footer className="bg-studio-mist py-10 text-control text-slate">
       <div className="page">
@@ -12,7 +15,7 @@ export function Footer({ profile, socials }: { profile: Profile; socials: Social
           <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
             {NAV.map((item) => (
               <a key={item.href} href={item.href} className="transition-colors duration-300 hover:text-ink">
-                {item.label}
+                {t(item.key)}
               </a>
             ))}
             {socials.map((social) => (
@@ -28,18 +31,22 @@ export function Footer({ profile, socials }: { profile: Profile; socials: Social
             ))}
           </nav>
         </div>
-        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-between">
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {profile.fullName}. Built on Cloudflare Pages, D1 &amp; R2.
+            © {new Date().getFullYear()} {profile.fullName}. {t("footer.rights")}
           </p>
-          <p>
-            Font made from{" "}
-            <a href="http://www.onlinewebfonts.com/fonts" target="_blank" rel="noreferrer" className="underline hover:text-ink">
-              Web Fonts
-            </a>{" "}
-            is licensed by CC BY 4.0.
-          </p>
+          <a href="#top" className="inline-flex items-center gap-1 transition-colors duration-300 hover:text-ink">
+            {t("footer.backToTop")} <ArrowUp size={14} strokeWidth={1.75} aria-hidden />
+          </a>
         </div>
+        {/* Helvetica Neue ME is CC BY 4.0: the credit has to stay on the page while index.html loads it. */}
+        <p className="mt-3 text-[9px] leading-tight text-steel/70">
+          Helvetica Neue ME by{" "}
+          <a href="http://www.onlinewebfonts.com" target="_blank" rel="noreferrer" className="hover:text-ink hover:underline">
+            OnlineWebFonts
+          </a>
+          , CC BY 4.0.
+        </p>
       </div>
     </footer>
   );

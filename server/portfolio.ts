@@ -1,4 +1,4 @@
-import type { Portfolio, Project } from "../shared/types";
+import type { Portfolio, Project, Translation } from "../shared/types";
 
 export interface Env {
   DB: D1Database;
@@ -47,7 +47,7 @@ function toProject(row: Row): Project {
 
 /** Reads the whole portfolio in one D1 round trip. Returns null until the database is seeded. */
 export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
-  const [profile, socials, stats, skills, projects, experience, education, organizations, certifications] =
+  const [profile, socials, stats, skills, projects, experience, education, organizations, certifications, moments, translations] =
     await db.batch<Row>([
       db.prepare("SELECT * FROM profile WHERE id = 1"),
       db.prepare("SELECT label, handle, url FROM socials ORDER BY sort, id"),
@@ -58,6 +58,8 @@ export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
       db.prepare("SELECT * FROM education ORDER BY sort, id"),
       db.prepare("SELECT * FROM organizations ORDER BY sort, id"),
       db.prepare("SELECT title, issuer, year FROM certifications ORDER BY sort, id"),
+      db.prepare("SELECT image_key, alt, caption FROM moments ORDER BY sort, id"),
+      db.prepare("SELECT locale, data FROM translations"),
     ]);
 
   const p = profile.results[0];
@@ -125,5 +127,15 @@ export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
       issuer: text(r.issuer),
       year: text(r.year),
     })),
+    moments: moments.results.map((r) => ({ src: text(r.image_key), alt: text(r.alt), caption: optional(r.caption) })),
+    translations: Object.fromEntries(
+      translations.results.flatMap((r) => {
+        try {
+          return [[text(r.locale), JSON.parse(text(r.data)) as Translation]];
+        } catch {
+          return [];
+        }
+      }),
+    ),
   };
 }

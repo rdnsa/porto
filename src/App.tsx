@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { About } from "./components/About";
 import { CaseStudy } from "./components/CaseStudy";
 import { Contact } from "./components/Contact";
@@ -10,17 +10,36 @@ import { LocalNav } from "./components/LocalNav";
 import { MenuButton, MobileMenu } from "./components/MobileMenu";
 import { Ownership } from "./components/Ownership";
 import { Journey } from "./components/Journey";
+import { Moments } from "./components/Moments";
+import { Quote } from "./components/Quote";
 import { Work } from "./components/Work";
+import { localize, usePreferences } from "./lib/prefs";
 import { useCaseRoute } from "./lib/useCaseRoute";
 import { usePortfolio } from "./lib/usePortfolio";
 
 export default function App() {
-  const portfolio = usePortfolio();
+  const source = usePortfolio();
+  const { lang } = usePreferences();
+  const portfolio = useMemo(() => (source ? localize(source, lang) : null), [source, lang]);
   const route = useCaseRoute();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const project = portfolio?.projects.find((p) => p.slug === route.slug) ?? null;
   const caseOpen = project !== null;
+
+  // "#top" links (name, Back to top) scroll up without leaving "#top" in the address bar.
+  useEffect(() => {
+    if (location.hash === "#top") history.replaceState(history.state, "", location.pathname + location.search);
+    const onClick = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest?.('a[href="#top"]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (location.hash) history.replaceState(history.state, "", location.pathname + location.search);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   // Unknown /work/:slug (renamed or unpublished in D1): fall back to the home page.
   useEffect(() => {
@@ -43,11 +62,13 @@ export default function App() {
           <Ownership skills={portfolio.skills} role={profile.role} tagline={profile.tagline} />
           <Work projects={portfolio.projects} onOpen={(slug) => route.open(slug)} />
           <Journey experience={portfolio.experience} />
+          <Moments moments={portfolio.moments ?? []} />
           <Education
             education={portfolio.education}
             organizations={portfolio.organizations}
             certifications={portfolio.certifications}
           />
+          <Quote />
           <Contact profile={profile} socials={socials} />
         </main>
         <Footer profile={profile} socials={socials} />

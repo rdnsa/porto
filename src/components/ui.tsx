@@ -1,4 +1,5 @@
 import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { useScrollVar } from "../lib/scroll";
 
 /** Renders **bold** markers from the content as <strong>. */
@@ -18,38 +19,67 @@ export function Rich({ text }: { text: string }) {
   );
 }
 
-/** Fades content up once it scrolls into view. */
+/**
+ * Fades content into place every time it scrolls into view, in both directions: it rises from
+ * below on the way down and drops in from above on the way back up. With `stagger`, the direct
+ * children enter one after another (in reverse order when coming from above).
+ */
 export function Reveal({
   children,
   className = "",
   delay = 0,
+  stagger = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  stagger?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  // The side the content last left through, so it comes back in from the same side.
+  const [from, setFrom] = useState<"below" | "above">("below");
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (stagger) {
+      const items = [...node.children] as HTMLElement[];
+      node.style.setProperty("--n", String(items.length));
+      items.forEach((item, i) => item.style.setProperty("--i", String(i)));
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
+        const side = entry.boundingClientRect.top < 0 ? "above" : "below";
+        if (!entry.isIntersecting) {
+          setVisible(false);
+          setFrom(side);
+          return;
         }
+        if (node.dataset.from !== side) {
+          // Jumped straight past it (anchor link, fast fling), so it is still parked on the other
+          // side: move it to the side it is really entering from without animating that move.
+          node.dataset.snap = "";
+          flushSync(() => setFrom(side));
+          void node.offsetWidth;
+          delete node.dataset.snap;
+        }
+        setVisible(true);
       },
       { rootMargin: "0px 0px -8% 0px" },
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [stagger]);
 
-  const style: CSSProperties | undefined = delay ? { transitionDelay: `${delay}ms` } : undefined;
+  const style = delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined;
   return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={style}>
+    <div
+      ref={ref}
+      data-from={from}
+      className={`${stagger ? "reveal-stagger" : "reveal"} ${visible ? "is-visible" : ""} ${className}`}
+      style={style}
+    >
       {children}
     </div>
   );
@@ -70,7 +100,7 @@ export function SectionHeading({
   tone?: "light" | "dark";
 }) {
   return (
-    <Reveal>
+    <Reveal stagger>
       {kicker && <p className={`text-kicker ${tone === "dark" ? "text-cream/60" : "text-slate"}`}>{kicker}</p>}
       <h2 id={id} className={`text-headline ${kicker ? "mt-3" : ""} max-w-[24ch]`}>
         {title}

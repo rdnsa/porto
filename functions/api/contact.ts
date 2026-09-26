@@ -4,7 +4,8 @@ const LIMITS = { name: 120, email: 200, message: 4000 };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MAX_PER_WINDOW = 3; // messages per IP per 10 minutes
 
-const fail = (status: number, error: string) => Response.json({ ok: false, error }, { status });
+// `code` lets the page show the message in the visitor's language; `error` is the English fallback.
+const fail = (status: number, error: string, code = "generic") => Response.json({ ok: false, error, code }, { status });
 
 const field = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
 
@@ -33,8 +34,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const name = field(body.name, LIMITS.name);
   const email = field(body.email, LIMITS.email);
   const message = field(body.message, LIMITS.message);
-  if (!name || !email || !message) return fail(422, "Please fill in your name, email and message.");
-  if (!EMAIL.test(email)) return fail(422, "That email address doesn't look right.");
+  if (!name || !email || !message) return fail(422, "Please fill in your name, email and message.", "missing_fields");
+  if (!EMAIL.test(email)) return fail(422, "That email address doesn't look right.", "invalid_email");
 
   const ip = request.headers.get("CF-Connecting-IP");
   const ipHash = ip ? await hashIp(ip) : null;
@@ -44,7 +45,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     )
       .bind(ipHash)
       .first<number>("count");
-    if ((recent ?? 0) >= MAX_PER_WINDOW) return fail(429, "Too many messages — please try again in a few minutes.");
+    if ((recent ?? 0) >= MAX_PER_WINDOW) return fail(429, "Too many messages — please try again in a few minutes.", "rate_limited");
   }
 
   await env.DB.prepare(
