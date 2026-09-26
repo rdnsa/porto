@@ -5,6 +5,7 @@ import { media } from "../lib/media";
 import { useBodyScrollLock } from "../lib/useBodyScrollLock";
 import { useT } from "../lib/prefs";
 import { useDialog } from "../lib/useDialog";
+import { Preferences } from "./Preferences";
 import { Rich } from "./ui";
 
 const METRIC_COLUMNS = ["", "md:grid-cols-1", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-4"];
@@ -70,15 +71,18 @@ export function CaseStudy({
         <div className="sticky top-0 z-10 border-b border-black/10 bg-paper-frost/80 backdrop-blur-xl dark:border-white/10 backdrop-saturate-150">
           <div className="page flex h-13 items-center justify-between gap-4">
             <p className="truncate font-display text-nav-title">{current.name}</p>
-            <button
-              type="button"
-              onClick={onClose}
-              data-autofocus
-              aria-label={t("case.close")}
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-[#e8e8ed] text-ink/70 transition-colors duration-300 hover:bg-[#dcdce0] hover:text-ink dark:bg-[#333336] dark:hover:bg-[#424245]"
-            >
-              <X size={18} strokeWidth={2} />
-            </button>
+            <div className="flex shrink-0 items-center gap-3">
+              <Preferences />
+              <button
+                type="button"
+                onClick={onClose}
+                data-autofocus
+                aria-label={t("case.close")}
+                className="grid size-9 shrink-0 place-items-center rounded-full bg-[#e8e8ed] text-ink/70 transition-colors duration-300 hover:bg-[#dcdce0] hover:text-ink dark:bg-[#333336] dark:hover:bg-[#424245]"
+              >
+                <X size={18} strokeWidth={2} />
+              </button>
+            </div>
           </div>
         </div>
 

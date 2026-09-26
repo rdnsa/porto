@@ -251,7 +251,7 @@
       "tagline": "Warehouse & operations management system.",
       "summary": "An integrated ERP solution designed to centralize multi-warehouse inventory, streamline operational work orders, and automate real-time stock deductions across event transactions.",
       "description": "A centralized ERP system for Satellite of Glow to manage inventory across multiple warehouses, work orders, stock movements, and event cashier transactions.",
-      "role": "Project Manager",
+      "role": "Product & Project Manager",
       "roleDetail": "Led the ERP implementation — a flexible development process, validated user requirements and a product roadmap.",
       "company": "PT InfantAI Teknologi Nusantara",
       "year": "2026",
@@ -313,7 +313,7 @@
       "tagline": "Melbourne property partnership platform.",
       "summary": "A digital partnership platform designed to connect investors with Melbourne property opportunities, streamlining the end-to-end journey from user onboarding and admin approval to QR-verified event access.",
       "description": "NordPartners is a digital platform designed to support property partnership activities in Melbourne, connecting participants with property opportunities and managing the registration and approval process.",
-      "role": "Project & Product Manager",
+      "role": "Product & Project Manager",
       "roleDetail": "Managed requirements, priorities, stakeholder coordination, and development delivery.",
       "company": null,
       "year": null,
@@ -388,7 +388,7 @@
       "tagline": "Integrated factory management platform — NOSE HRIS.",
       "summary": "A centralized HRIS module within a comprehensive factory ERP platform, built to unify employee data, complex attendance shifts, payroll, and talent acquisition into a single operational hub.",
       "description": "NOSE ONE is an integrated system that connects multiple factory divisions into one centralized platform. I managed the HRIS scope, focusing on employee management, attendance, payroll, and talent operations.",
-      "role": "Project Manager",
+      "role": "Product & Project Manager",
       "roleDetail": "Managed HRIS requirements, priorities, workflow design, stakeholder coordination & delivery.",
       "company": "PT Nose Herbal Indo",
       "year": "2026",
@@ -437,7 +437,7 @@
       "tagline": "AI summit & exhibition platform.",
       "summary": "An integrated event and exhibition platform built to connect global tech enterprises, industry professionals, and attendees through curated AI showcases, summits, and business matchmaking.",
       "description": "AIX Expo is a digital platform supporting an AI-focused summit and exhibition, connecting technology companies, businesses, professionals, creators, and visitors through an integrated event experience.",
-      "role": "Project Manager",
+      "role": "Product & Project Manager",
       "roleDetail": "Managed project requirements, priorities, stakeholder coordination, and development delivery.",
       "company": null,
       "year": "2026",
@@ -492,9 +492,9 @@
       "slug": "genius-ai",
       "name": "Genius AI",
       "category": "AI hardware · EdTech",
-      "tagline": "A conversational learning companion for kids.",
-      "summary": "An interactive AI-powered educational device that bridges embedded hardware and top-tier LLMs to create an engaging, child-friendly conversational learning experience.",
-      "description": "Part of InfantAI's early-education line: a compact companion device that pairs embedded hardware with top-tier LLMs, so children learn through natural conversation.",
+      "tagline": "A talking companion that helps kids learn English and practise speaking.",
+      "summary": "An interactive AI-powered device that bridges ESP32 hardware and top-tier LLMs so children can learn English and build their speaking skills through friendly, natural conversation.",
+      "description": "Part of InfantAI's early-education line: a compact ESP32-based companion device running XiaoZhi, an AI voice-assistant platform from China, connected to top-tier LLMs. Children learn English and practise speaking by simply talking with it.",
       "role": "Product & Project Manager",
       "roleDetail": "One of the concurrent InfantAI product lines in my portfolio.",
       "company": "PT InfantAI Teknologi Nusantara",
@@ -507,16 +507,16 @@
       "metrics": [],
       "modules": [
         {
-          "title": "Embedded hardware",
-          "body": "A compact device with its own screen, dressed in playful cases."
+          "title": "ESP32 hardware",
+          "body": "A compact ESP32 device with its own screen, dressed in playful cases."
         },
         {
-          "title": "Top-tier LLMs",
-          "body": "Conversations powered by leading large language models."
+          "title": "XiaoZhi + top-tier LLMs",
+          "body": "Runs XiaoZhi, an AI voice-assistant platform from China, which connects each conversation to leading large language models."
         },
         {
-          "title": "Built for children",
-          "body": "An engaging, child-friendly way to learn by talking."
+          "title": "English & speaking practice",
+          "body": "Built for children: they pick up English and gain confidence speaking through everyday conversation."
         }
       ],
       "flows": [],
@@ -661,8 +661,8 @@
       "year": "2025"
     },
     {
-      "title": "Cyber Security Awareness",
-      "issuer": "Professional certification",
+      "title": "Cyber Security Professional Certification",
+      "issuer": "CertiProf",
       "year": "2024"
     },
     {
@@ -1119,23 +1119,23 @@
         {
           "slug": "genius-ai",
           "category": "Hardware AI · EdTech",
-          "tagline": "Teman belajar interaktif untuk anak-anak.",
-          "summary": "Perangkat edukasi interaktif berbasis AI yang memadukan hardware embedded dengan LLM terbaik untuk pengalaman belajar lewat percakapan yang seru dan ramah anak.",
-          "description": "Bagian dari lini pendidikan anak usia dini InfantAI: perangkat pendamping yang ringkas, memadukan hardware embedded dengan LLM terbaik, sehingga anak belajar lewat percakapan alami.",
+          "tagline": "Teman bicara yang membantu anak belajar bahasa Inggris dan berlatih berbicara.",
+          "summary": "Perangkat interaktif berbasis AI yang memadukan hardware ESP32 dengan LLM terbaik, sehingga anak bisa belajar bahasa Inggris dan melatih kemampuan berbicara lewat percakapan yang seru dan alami.",
+          "description": "Bagian dari lini pendidikan anak usia dini InfantAI: perangkat pendamping ringkas berbasis ESP32 yang menjalankan XiaoZhi, platform asisten suara AI dari China, dan terhubung ke LLM terbaik. Anak belajar bahasa Inggris dan berlatih berbicara cukup dengan mengobrol bersamanya.",
           "roleDetail": "Salah satu lini produk InfantAI yang saya kelola secara bersamaan.",
           "coverAlt": "Perangkat Genius AI dengan casing dinosaurus hijau dan kelinci merah muda",
           "modules": [
             {
-              "title": "Hardware embedded",
-              "body": "Perangkat ringkas dengan layar sendiri, dibalut casing yang lucu."
+              "title": "Hardware ESP32",
+              "body": "Perangkat ESP32 yang ringkas dengan layar sendiri, dibalut casing yang lucu."
             },
             {
-              "title": "LLM terbaik",
-              "body": "Percakapan yang didukung large language model terdepan."
+              "title": "XiaoZhi + LLM terbaik",
+              "body": "Menjalankan XiaoZhi, platform asisten suara AI dari China, yang menghubungkan setiap percakapan ke large language model terdepan."
             },
             {
-              "title": "Dirancang untuk anak",
-              "body": "Cara belajar lewat berbicara yang seru dan ramah anak."
+              "title": "Belajar bahasa Inggris & berbicara",
+              "body": "Dirancang untuk anak: mereka belajar bahasa Inggris dan makin percaya diri berbicara lewat percakapan sehari-hari."
             }
           ]
         }
@@ -1238,14 +1238,6 @@
             "Membangun sistem registrasi dan data yang mempercepat verifikasi peserta hingga 40%.",
             "Menyelesaikan kendala on-site maupun remote rata-rata dalam sekitar 5 menit."
           ]
-        }
-      ],
-      "certifications": [
-        {},
-        {},
-        {},
-        {
-          "issuer": "Sertifikasi profesional"
         }
       ],
       "moments": [
