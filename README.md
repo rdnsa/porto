@@ -17,7 +17,7 @@ Live: **https://radenissa.pages.dev**
 | `server/` | Query D1 dan penyisipan data/meta ke HTML |
 | `src/` | Frontend |
 | `media-src/` → `media/` | Gambar asli → hasil optimasi (struktur sama dengan bucket R2) |
-| `scripts/` | Ekstraksi gambar dari PDF, cutout foto, build media, upload R2, generator seed |
+| `scripts/` | Ekstraksi gambar dari PDF, build media, upload R2, generator seed |
 
 `.env` berisi `CLOUDFLARE_ACCOUNT_ID`, karena login Wrangler punya akses ke 3 akun.
 

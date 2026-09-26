@@ -2,7 +2,7 @@ import { type ReactNode, createContext, useCallback, useContext, useEffect, useM
 import type { Locale } from "../../shared/types";
 import { LOCALES, MESSAGES, type MessageKey } from "./i18n";
 
-export type Theme = "light" | "dark";
+type Theme = "light" | "dark";
 
 // Matches the browser chrome to the page canvas (Studio Mist in each theme).
 const THEME_COLOR: Record<Theme, string> = { light: "#f5f5f7", dark: "#161617" };
