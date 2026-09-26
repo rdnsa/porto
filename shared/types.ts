@@ -125,6 +125,21 @@ export interface Certification {
   year: string;
 }
 
+/** A peer-reviewed paper, as listed on Google Scholar. */
+export interface Publication {
+  title: string;
+  authors: string[];
+  venue: string;
+  /** Volume, issue and pages, e.g. "2 (1), 9–15". */
+  details: string | null;
+  year: string;
+  url: string;
+  pdfUrl: string | null;
+  /** Citation count at the time the content was last updated. */
+  citations: number;
+  summary: string;
+}
+
 /** A photo in the "Moments" gallery. */
 export interface Moment {
   src: string;
@@ -152,6 +167,7 @@ export interface Portfolio {
   education: Education[];
   organizations: Organization[];
   certifications: Certification[];
+  publications: Publication[];
   moments: Moment[];
   translations?: Partial<Record<Exclude<Locale, "en">, Translation>>;
 }

@@ -12,6 +12,7 @@ import { Ownership } from "./components/Ownership";
 import { Journey } from "./components/Journey";
 import { Moments } from "./components/Moments";
 import { Quote } from "./components/Quote";
+import { Research } from "./components/Research";
 import { Work } from "./components/Work";
 import { localize } from "../shared/localize";
 import { usePreferences } from "./lib/prefs";
@@ -57,6 +58,11 @@ export default function App() {
             education={portfolio.education}
             organizations={portfolio.organizations}
             certifications={portfolio.certifications}
+          />
+          <Research
+            publications={portfolio.publications}
+            owner={profile.fullName}
+            profileUrl={socials.find((s) => s.url.includes("scholar.google."))?.url ?? null}
           />
           <Quote />
           <Contact profile={profile} socials={socials} />

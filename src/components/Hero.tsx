@@ -50,7 +50,7 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
 
       <div
         aria-hidden
-        className="anim-fade-up absolute inset-x-0 top-[16vh] z-10 overflow-hidden sm:top-[14vh]"
+        className="anim-fade-up absolute inset-x-0 top-[28vh] z-10 overflow-hidden sm:top-[14vh]"
         style={delay(500)}
       >
         {/* Two identical halves (two names each, so ultra-wide screens never show a gap). */}
@@ -65,12 +65,14 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
 
       <div
         aria-hidden
-        className="anim-line absolute inset-x-6 bottom-[5.5rem] z-10 h-px bg-ink sm:inset-x-10 sm:bottom-28"
+        className="anim-line absolute inset-x-6 bottom-[6.5rem] z-10 h-px bg-ink sm:inset-x-10 lg:hidden short:!block"
         style={delay(1200)}
       />
 
+      {/* Phones size the figure by height (like the name above it), so the head always tucks just
+          under the bottom of the name whatever the screen's shape; wider screens fit it whole. */}
       <div
-        className="anim-rise-in pointer-events-none absolute inset-x-0 bottom-0 top-[18vh] z-20 sm:top-[8vh]"
+        className="anim-rise-in pointer-events-none absolute inset-x-0 bottom-0 top-[34vh] z-20 flex justify-center sm:top-[8vh]"
         style={delay(300)}
       >
         <img
@@ -78,7 +80,7 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
           alt={t("hero.portraitAlt", { name: profile.fullName })}
           fetchPriority="high"
           style={portraitExit}
-          className="h-full w-full object-cover object-bottom will-change-transform sm:object-contain short:object-contain"
+          className="h-full w-auto max-w-none object-contain object-bottom will-change-transform sm:w-full"
         />
       </div>
 
@@ -125,8 +127,11 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
         </div>
       </header>
 
-      {/* Desktop blurb sits under the portrait's layer (z-10), clear of the figure. */}
-      <div style={chromeExit} className="absolute inset-x-0 bottom-0 z-10 hidden items-end justify-between gap-6 px-10 pb-8 text-sm leading-relaxed sm:flex short:!hidden">
+      {/* Desktop blurb sits under the portrait's layer (z-10), in the corner the figure leaves free —
+          only from lg up; on tablets the figure spans that corner, so they get the capsule below.
+          The hairline is stacked in the same column, so however the text wraps it never runs into it. */}
+      <div style={chromeExit} className="absolute inset-x-0 bottom-0 z-10 hidden flex-col gap-5 px-10 pb-8 text-sm leading-relaxed lg:flex short:!hidden">
+        <div aria-hidden className="anim-line h-px bg-ink" style={delay(1200)} />
         <p className="anim-fade-up max-w-[55%]" style={delay(1400)}>
           {profile.role}
           <br />
@@ -134,17 +139,12 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
           <br />
           <span className="text-slate">{profile.location}</span>
         </p>
-        <p className="anim-fade-up max-w-[45%] text-right" style={delay(1550)}>
-          <span className="text-slate">{t("hero.currentlyAt")}</span>
-          <br />
-          {profile.currentCompany}
-        </p>
       </div>
 
-      {/* Mobile: the portrait fills the width, so the blurb floats over it as a
+      {/* Phones and tablets: the figure covers the bottom corners, so the blurb floats over it as a
           DESIGN.md "Floating Pricing Callout" — white 28px capsule with the blue pill inside. */}
       <div
-        className="anim-fade-up absolute inset-x-4 bottom-4 z-30 mx-auto flex max-w-md items-center justify-between gap-4 rounded-[28px] bg-white/90 py-3 dark:bg-[#1d1d1f]/85 pl-5 pr-3 backdrop-blur-xl sm:hidden short:!flex"
+        className="anim-fade-up absolute inset-x-4 bottom-4 z-30 mx-auto flex max-w-md items-center justify-between gap-4 rounded-[28px] bg-white/90 py-3 dark:bg-[#1d1d1f]/85 pl-5 pr-3 backdrop-blur-xl lg:hidden short:!flex"
         style={delay(1400)}
       >
         <p className="min-w-0">

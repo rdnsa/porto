@@ -48,7 +48,7 @@ function toProject(row: Row): Project {
 
 /** Reads the whole portfolio in one D1 round trip. Returns null until the database is seeded. */
 export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
-  const [profile, socials, stats, skills, projects, experience, education, organizations, certifications, moments, translations] =
+  const [profile, socials, stats, skills, projects, experience, education, organizations, certifications, publications, moments, translations] =
     await db.batch<Row>([
       db.prepare("SELECT * FROM profile WHERE id = 1"),
       db.prepare("SELECT label, handle, url FROM socials ORDER BY sort, id"),
@@ -59,6 +59,7 @@ export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
       db.prepare("SELECT * FROM education ORDER BY sort, id"),
       db.prepare("SELECT * FROM organizations ORDER BY sort, id"),
       db.prepare("SELECT title, issuer, year FROM certifications ORDER BY sort, id"),
+      db.prepare("SELECT * FROM publications ORDER BY sort, id"),
       db.prepare("SELECT image_key, alt, caption FROM moments ORDER BY sort, id"),
       db.prepare("SELECT locale, data FROM translations"),
     ]);
@@ -127,6 +128,17 @@ export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
       title: text(r.title),
       issuer: text(r.issuer),
       year: text(r.year),
+    })),
+    publications: publications.results.map((r) => ({
+      title: text(r.title),
+      authors: json<string>(r.authors),
+      venue: text(r.venue),
+      details: optional(r.details),
+      year: text(r.year),
+      url: text(r.url),
+      pdfUrl: optional(r.pdf_url),
+      citations: Number(r.citations) || 0,
+      summary: text(r.summary),
     })),
     moments: moments.results.map((r) => ({ src: text(r.image_key), alt: text(r.alt), caption: optional(r.caption) })),
     translations: Object.fromEntries(

@@ -33,6 +33,11 @@
       "label": "GitHub",
       "handle": "rdnsa",
       "url": "https://github.com/rdnsa"
+    },
+    {
+      "label": "Google Scholar",
+      "handle": "Raden Mochamad Issa W.",
+      "url": "https://scholar.google.com/citations?user=gOTPlVgAAAAJ&hl=en"
     }
   ],
   "stats": [
@@ -655,6 +660,11 @@
   ],
   "certifications": [
     {
+      "title": "TOEFL — 583",
+      "issuer": "Lembaga Bahasa UBSI",
+      "year": "2026"
+    },
+    {
       "title": "Golang Intermediate",
       "issuer": "HackerRank",
       "year": "2026"
@@ -698,6 +708,40 @@
       "title": "Web Development (Front End)",
       "issuer": "Dibimbing.id",
       "year": "2022"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Predicting the Growth of MSMEs in West Java Towards Golden Indonesia 2045 Using Linear Regression",
+      "authors": [
+        "Raden Mochamad Issa Wirakusumah",
+        "Rizki Hesananda"
+      ],
+      "venue": "Innotech: Jurnal Ilmu Komputer, Sistem Informasi dan Teknologi Informasi",
+      "details": "2 (1)",
+      "year": "2025",
+      "url": "https://ejournal.cyber-univ.ac.id/index.php/innotech/article/view/87",
+      "pdfUrl": "https://ejournal.cyber-univ.ac.id/index.php/innotech/article/download/87/118",
+      "citations": 1,
+      "summary": "Projects the number of MSMEs in West Java up to 2045 with a linear regression model trained on West Java open data, in line with the Golden Indonesia 2045 vision."
+    },
+    {
+      "title": "Implementing Private Cloud Storage with ownCloud and Ubuntu Linux on Oracle VirtualBox",
+      "authors": [
+        "Dedi Dwi Saputra",
+        "Diah Dwi Noviati",
+        "Raden Mochamad Issa Wirakusumah",
+        "Achmad Faiz",
+        "Fildzah Dwifadzila Wijaya",
+        "Mohammad Fauzan Zidny"
+      ],
+      "venue": "Jurnal Komputer Antartika",
+      "details": "2 (1), 9–15",
+      "year": "2024",
+      "url": "https://ejournal.mediaantartika.id/index.php/jka/article/view/232",
+      "pdfUrl": "https://ejournal.mediaantartika.id/index.php/jka/article/download/232/51",
+      "citations": 3,
+      "summary": "Evaluates ownCloud on Ubuntu, virtualised in VirtualBox, as a secure and flexible private cloud for storing coursework and exams, measuring its security and performance."
     }
   ],
   "moments": [
@@ -1300,6 +1344,16 @@
           "src": "moments/itb-class.webp",
           "alt": "Raden Issa memberi materi di depan kelas ITB saat sesi pelatihan AI, dengan peserta duduk di meja panjang",
           "caption": "Memandu kelas pelatihan AI di ITB, Bandung."
+        }
+      ],
+      "publications": [
+        {
+          "summary": "Memproyeksikan jumlah UMKM di Jawa Barat hingga 2045 dengan model regresi linear berbasis data terbuka Jawa Barat, sejalan dengan visi Indonesia Emas 2045.",
+          "title": "Prediksi Pertumbuhan Jumlah UMKM di Jawa Barat Menuju Indonesia Emas 2045 Menggunakan Regresi Linear"
+        },
+        {
+          "summary": "Mengevaluasi ownCloud di Ubuntu yang divirtualisasi dengan VirtualBox sebagai private cloud yang aman dan fleksibel untuk menyimpan tugas dan ujian, mengukur keamanan dan kinerjanya.",
+          "title": "Implementasi Private Cloud Storage dengan Menggunakan ownCloud dan Linux Ubuntu pada VirtualBox Oracle"
         }
       ]
     }

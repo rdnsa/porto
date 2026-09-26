@@ -29,10 +29,6 @@ export function About({ profile }: { profile: Profile }) {
                 <dt className="text-control text-slate">{t("about.basedIn")}</dt>
                 <dd className="mt-1 text-body">{profile.location}</dd>
               </div>
-              <div className="col-span-2">
-                <dt className="text-control text-slate">{t("about.currently")}</dt>
-                <dd className="mt-1 text-body">{profile.currentCompany}</dd>
-              </div>
             </dl>
             {profile.resume && (
               <a
