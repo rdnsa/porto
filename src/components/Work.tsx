@@ -31,6 +31,9 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef({ active: false, moved: false, startX: 0, startScroll: 0 });
   const cancelGlide = useRef<() => void>(() => {});
+  // The slide a glide is heading to. Rapid clicks step on from here, not from the scroll position,
+  // which lags behind mid-glide (so spamming Next used to keep re-aiming at the same slide).
+  const target = useRef<number | null>(null);
   const [index, setIndex] = useState(0);
   const [atEnd, setAtEnd] = useState(false);
   // Always starts playing (every 2s); the pause button is there for anyone who wants it still.
@@ -46,6 +49,11 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
   const sync = useCallback(() => {
     const node = scroller.current;
     if (!node) return;
+    if (target.current !== null) {
+      setIndex(target.current);
+      setAtEnd(target.current === projects.length - 1);
+      return;
+    }
     const end = node.scrollLeft >= node.scrollWidth - node.clientWidth - 4;
     setAtEnd(end);
     setIndex(end ? projects.length - 1 : Math.round(node.scrollLeft / Math.max(step(), 1)));
@@ -89,17 +97,34 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
     };
   }, []);
 
-  const go = (target: number) => {
+  const go = (slide: number) => {
     const node = scroller.current;
     if (!node) return;
-    const clamped = Math.max(0, Math.min(projects.length - 1, target));
+    const clamped = Math.max(0, Math.min(projects.length - 1, slide));
+    const continuing = target.current !== null;
+    target.current = clamped;
+    setIndex(clamped);
+    setAtEnd(clamped === projects.length - 1);
     cancelGlide.current();
-    cancelGlide.current = glideScroll(node, clamped * step());
+    cancelGlide.current = glideScroll(node, clamped * step(), {
+      continuing,
+      onDone: () => {
+        target.current = null;
+        sync();
+      },
+    });
+  };
+
+  const stopGlide = () => {
+    cancelGlide.current();
+    target.current = null;
   };
 
   useEffect(() => () => cancelGlide.current(), []);
 
-  const advance = () => go(atEnd ? 0 : index + 1);
+  // Where the next step starts from: the glide's destination while one is running.
+  const current = () => target.current ?? index;
+  const advance = () => go(atEnd ? 0 : current() + 1);
 
   const openCase = (event: MouseEvent, slug: string) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
@@ -110,7 +135,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
   // Mouse drag-to-scroll (touch and trackpads already scroll natively).
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     // Any touch or click takes over from a glide in progress.
-    cancelGlide.current();
+    stopGlide();
     const node = scroller.current;
     if (event.pointerType !== "mouse" || event.button !== 0 || !node) return;
     drag.current = { active: true, moved: false, startX: event.clientX, startScroll: node.scrollLeft };
@@ -142,8 +167,8 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
     const dx = event.clientX - state.startX;
     // Flick direction wins over position, so a short drag still turns the page.
     const base = state.startScroll / Math.max(step(), 1);
-    const target = Math.abs(dx) > 60 ? Math.round(base) + (dx < 0 ? 1 : -1) : Math.round(node.scrollLeft / step());
-    go(target);
+    const slide = Math.abs(dx) > 60 ? Math.round(base) + (dx < 0 ? 1 : -1) : Math.round(node.scrollLeft / step());
+    go(slide);
     setDragging(false);
   };
 
@@ -157,8 +182,8 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
   };
 
   const onKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "ArrowRight") go(index + 1);
-    else if (event.key === "ArrowLeft") go(index - 1);
+    if (event.key === "ArrowRight") go(current() + 1);
+    else if (event.key === "ArrowLeft") go(current() - 1);
     else return;
     event.preventDefault();
   };
@@ -214,7 +239,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
       </Reveal>
 
       <div className="page mt-8 flex items-center justify-center gap-3">
-        <CarouselButton label={t("work.previous")} disabled={index === 0} onClick={() => go(index - 1)} className="hidden sm:grid">
+        <CarouselButton label={t("work.previous")} disabled={index === 0} onClick={() => go(current() - 1)} className="hidden sm:grid">
           <ChevronLeft size={20} strokeWidth={2} />
         </CarouselButton>
         <div className="flex h-11 items-center gap-2.5 rounded-[36px] bg-[rgba(210,210,215,0.64)] px-5 backdrop-blur-md dark:bg-[rgba(66,66,69,0.72)]">
@@ -241,7 +266,7 @@ export function Work({ projects, onOpen }: { projects: Project[]; onOpen: (slug:
             </button>
           ))}
         </div>
-        <CarouselButton label={t("work.next")} disabled={atEnd} onClick={() => go(index + 1)} className="hidden sm:grid">
+        <CarouselButton label={t("work.next")} disabled={atEnd} onClick={() => go(current() + 1)} className="hidden sm:grid">
           <ChevronRight size={20} strokeWidth={2} />
         </CarouselButton>
         <CarouselButton

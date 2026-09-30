@@ -48,7 +48,7 @@ export function LocalNav({ name, onMenu }: { name: string; onMenu: () => void })
       inert={!visible}
       className={`pointer-events-none fixed inset-x-0 top-3 z-[35] flex justify-center px-3 transition-[translate,scale,opacity] duration-700 ease-out-quint sm:top-4 ${visible ? "translate-y-0 scale-100 opacity-100" : "-translate-y-[calc(100%+1.5rem)] scale-95 opacity-0"}`}
     >
-      <div className="pointer-events-auto relative flex h-13 w-full max-w-[720px] items-center justify-between gap-6 overflow-hidden rounded-full border border-black/[0.08] bg-paper-frost/85 dark:border-white/10 pl-6 pr-2 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.22)] backdrop-blur-xl backdrop-saturate-150">
+      <div className="pointer-events-auto relative flex h-13 w-full max-w-[720px] items-center justify-between gap-6 overflow-hidden rounded-full border glass pl-6 pr-2 [--glass-drop:0_10px_40px_-12px_rgba(0,0,0,0.22)]">
         {/* Reading progress along the capsule's bottom edge, kept clear of the rounded ends. */}
         <div
           ref={bar}

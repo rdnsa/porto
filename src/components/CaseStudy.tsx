@@ -68,7 +68,7 @@ export function CaseStudy({
         ref={scroller}
         className={`h-full overflow-y-auto overscroll-contain bg-gallery-white transition-transform duration-700 ease-out-quint ${open ? "translate-y-0" : "translate-y-10"}`}
       >
-        <div className="sticky top-0 z-10 border-b border-black/10 bg-paper-frost/80 backdrop-blur-xl dark:border-white/10 backdrop-saturate-150">
+        <div className="sticky top-0 z-10 border-b glass">
           <div className="page flex h-13 items-center justify-between gap-4">
             <p className="truncate font-display text-nav-title">{current.name}</p>
             <div className="flex shrink-0 items-center gap-3">

@@ -592,7 +592,7 @@
         },
         {
           "src": "projects/kato-report/reports-dark.webp",
-          "alt": "Incoming reports page showing 3 of 4 reports resolved and a low-priority report card",
+          "alt": "Incoming reports page showing 3 of 4 reports resolved with low- and medium-priority report cards",
           "caption": "Public report tracker with status and priority filters."
         }
       ]

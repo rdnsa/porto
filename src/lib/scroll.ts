@@ -61,14 +61,22 @@ export function useScrollVar(
 }
 
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+const easeOutCubic = (t: number) => 1 - (1 - t) ** 3;
 
 /**
  * Glides a horizontal scroller to `left` with an eased animation instead of the browser's short,
  * linear-feeling smooth scroll. Snap is lifted for the ride (it would fight every frame) and put back
  * on arrival. Longer trips take a little longer, so a wrap back to the first slide doesn't whip past.
- * Returns a cancel function (for a drag or touch that interrupts it).
+ * `continuing` retargets a glide already under way: it leaves at speed (ease-out, shorter), so rapid
+ * next-next-next clicks keep their momentum instead of restarting from a standstill each time.
+ * `onDone` fires on arrival, not on cancel. Returns a cancel function (for a drag or touch that
+ * interrupts it).
  */
-export function glideScroll(node: HTMLElement, left: number): () => void {
+export function glideScroll(
+  node: HTMLElement,
+  left: number,
+  { continuing = false, onDone }: { continuing?: boolean; onDone?: () => void } = {},
+): () => void {
   const from = node.scrollLeft;
   const to = Math.max(0, Math.min(left, node.scrollWidth - node.clientWidth));
   const distance = to - from;
@@ -78,10 +86,14 @@ export function glideScroll(node: HTMLElement, left: number): () => void {
   };
   if (Math.abs(distance) < 1) {
     release();
+    onDone?.();
     return () => {};
   }
 
-  const duration = Math.min(1200, Math.max(650, 450 + Math.abs(distance) * 0.5));
+  const ease = continuing ? easeOutCubic : easeInOutCubic;
+  const duration = continuing
+    ? Math.min(900, Math.max(380, 250 + Math.abs(distance) * 0.35))
+    : Math.min(1200, Math.max(650, 450 + Math.abs(distance) * 0.5));
   node.style.scrollSnapType = "none";
   node.style.scrollBehavior = "auto";
 
@@ -89,9 +101,12 @@ export function glideScroll(node: HTMLElement, left: number): () => void {
   const start = performance.now();
   const tick = (now: number) => {
     const t = Math.min(1, (now - start) / duration);
-    node.scrollLeft = from + distance * easeInOutCubic(t);
+    node.scrollLeft = from + distance * ease(t);
     if (t < 1) raf = requestAnimationFrame(tick);
-    else release();
+    else {
+      release();
+      onDone?.();
+    }
   };
   raf = requestAnimationFrame(tick);
 

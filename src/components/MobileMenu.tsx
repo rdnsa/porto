@@ -59,7 +59,7 @@ export function MobileMenu({ open, onClose, socials }: { open: boolean; onClose:
         role="dialog"
         aria-modal="true"
         aria-label={t("nav.menu")}
-        className={`fixed inset-y-0 right-0 z-40 flex w-[80%] max-w-sm flex-col border-l border-control-gray overflow-y-auto bg-paper-frost/95 px-8 py-10 short:py-6 backdrop-blur-xl transition-transform duration-[600ms] ${EASE} ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed inset-y-0 right-0 z-40 flex w-[80%] max-w-sm flex-col border-l glass overflow-y-auto px-8 py-10 short:py-6 transition-transform duration-[600ms] ${EASE} ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <button
           type="button"

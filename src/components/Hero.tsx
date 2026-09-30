@@ -144,7 +144,7 @@ export function Hero({ profile, socials }: { profile: Profile; socials: Social[]
       {/* Phones and tablets: the figure covers the bottom corners, so the blurb floats over it as a
           DESIGN.md "Floating Pricing Callout" — white 28px capsule with the blue pill inside. */}
       <div
-        className="anim-fade-up absolute inset-x-4 bottom-4 z-30 mx-auto flex max-w-md items-center justify-between gap-4 rounded-[28px] bg-white/90 py-3 dark:bg-[#1d1d1f]/85 pl-5 pr-3 backdrop-blur-xl lg:hidden short:!flex"
+        className="anim-fade-up absolute inset-x-4 bottom-4 z-30 mx-auto flex max-w-md items-center justify-between gap-4 rounded-[28px] border glass py-3 pl-5 pr-3 lg:hidden short:!flex"
         style={delay(1400)}
       >
         <p className="min-w-0">

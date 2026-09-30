@@ -44,15 +44,20 @@ export function About({ profile }: { profile: Profile }) {
           {profile.aboutImage && (
             <Reveal className="lg:col-span-7" delay={120}>
               <figure className="lg:-mr-[max(var(--gutter),calc((100vw-var(--content))/2))]">
-                <img
-                  src={media(profile.aboutImage)}
-                  alt={profile.aboutImageCaption ?? ""}
-                  loading="lazy"
-                  className="scroll-zoom aspect-[16/10] w-full rounded-card object-cover lg:rounded-r-none"
-                />
-                {profile.aboutImageCaption && (
-                  <figcaption className="mt-3 max-w-[60ch] text-control text-slate">{profile.aboutImageCaption}</figcaption>
-                )}
+                <div className="scroll-zoom relative">
+                  <img
+                    src={media(profile.aboutImage)}
+                    alt={profile.aboutImageCaption ?? ""}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full rounded-card object-cover lg:rounded-r-none"
+                  />
+                  {/* Frosted caption over the photo, where the glass has something to blur. */}
+                  {profile.aboutImageCaption && (
+                    <figcaption className="absolute inset-x-3 bottom-3 max-w-[52ch] rounded-[18px] border glass px-4 py-3 text-control text-ink sm:inset-x-5 sm:bottom-5">
+                      {profile.aboutImageCaption}
+                    </figcaption>
+                  )}
+                </div>
               </figure>
             </Reveal>
           )}

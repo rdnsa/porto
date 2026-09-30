@@ -5,7 +5,7 @@ import { media } from "../lib/media";
 import { useT } from "../lib/prefs";
 import { useBodyScrollLock } from "../lib/useBodyScrollLock";
 import { useDialog } from "../lib/useDialog";
-import { Reveal, SectionHeading } from "./ui";
+import { Reveal, ScrollWords } from "./ui";
 
 /** "Off the roadmap": a masonry of photos that open in a full-screen viewer. */
 export function Moments({ moments }: { moments: Moment[] }) {
@@ -16,7 +16,16 @@ export function Moments({ moments }: { moments: Moment[] }) {
   return (
     <section id="moments" aria-labelledby="moments-title" className="bg-gallery-white pb-[90px] sm:pb-32">
       <div className="page">
-        <SectionHeading id="moments-title" kicker={t("moments.kicker")} title={t("moments.title")} aside={t("moments.aside")} />
+        {/* Same scroll-lit headline as About: the words light up one after another as it scrolls in. */}
+        <Reveal stagger>
+          <p className="text-kicker text-slate">{t("moments.kicker")}</p>
+          <ScrollWords
+            id="moments-title"
+            lead={t("moments.title")}
+            muted={t("moments.aside")}
+            className="mt-3 max-w-[24ch] text-headline"
+          />
+        </Reveal>
         <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:mt-16 lg:columns-3">
           {moments.map((moment, i) => (
             <Reveal key={moment.src} delay={(i % 3) * 90} className="mb-5 break-inside-avoid">
