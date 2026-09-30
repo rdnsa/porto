@@ -25,9 +25,9 @@ const jobs = [
   { key: "projects/nordpartners/home.webp", from: "pdf/nordpartners-home.png" },
   { key: "projects/aix-expo/home.webp", from: "pdf/aix-home.png" },
   // Kato Report: 2x screenshots of https://ai-complaint.yvrtz.workers.dev in its dark theme (crops skip user uploads).
-  { key: "projects/kato-report/home-dark.webp", from: "kato-report/home-dark.png", crop: { left: 400, top: 1200, width: 2080, height: 960 }, width: 1400 },
-  { key: "projects/kato-report/map-dark.webp", from: "kato-report/student-dark.png", crop: { left: 664, top: 714, width: 1552, height: 1032 }, width: 1400 },
-  { key: "projects/kato-report/reports-dark.webp", from: "kato-report/reports-dark.png", crop: { left: 400, top: 0, width: 2080, height: 1470 }, width: 1400 },
+  { key: "projects/kato-report/roles-dark.webp", from: "kato-report/home-dark.png", crop: { left: 400, top: 1200, width: 2080, height: 960 }, width: 1400 },
+  { key: "projects/kato-report/building-map-dark.webp", from: "kato-report/student-dark.png", crop: { left: 664, top: 714, width: 1552, height: 1032 }, width: 1400 },
+  { key: "projects/kato-report/report-list-dark.webp", from: "kato-report/reports-dark.png", crop: { left: 400, top: 0, width: 2080, height: 1470 }, width: 1400 },
 ];
 
 // Files are overwritten in place, never wiped first: media/ also holds images with no source here

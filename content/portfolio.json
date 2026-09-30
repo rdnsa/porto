@@ -548,7 +548,7 @@
       "company": null,
       "year": "2026",
       "url": "https://ai-complaint.yvrtz.workers.dev",
-      "cover": "projects/kato-report/home-dark.webp",
+      "cover": "projects/kato-report/roles-dark.webp",
       "coverAlt": "Kato Report home: choose your role as student, cleaning staff or supervisor",
       "coverFocus": "start",
       "theme": "dark",
@@ -586,12 +586,12 @@
       "stories": [],
       "gallery": [
         {
-          "src": "projects/kato-report/map-dark.webp",
+          "src": "projects/kato-report/building-map-dark.webp",
           "alt": "UPI Tasikmalaya building map with lettered buildings",
           "caption": "Building map and floor picker, for toilets whose QR sticker is missing."
         },
         {
-          "src": "projects/kato-report/reports-dark.webp",
+          "src": "projects/kato-report/report-list-dark.webp",
           "alt": "Incoming reports page showing 3 of 4 reports resolved with low- and medium-priority report cards",
           "caption": "Public report tracker with status and priority filters."
         }
@@ -1293,13 +1293,13 @@
           ],
           "gallery": [
             {
-              "src": "projects/kato-report/map-dark.webp",
+              "src": "projects/kato-report/building-map-dark.webp",
               "alt": "Peta gedung UPI Tasikmalaya dengan huruf tiap gedung",
               "caption": "Peta gedung dan pilihan lantai, untuk toilet yang stiker QR-nya hilang."
             },
             {
-              "src": "projects/kato-report/reports-dark.webp",
-              "alt": "Halaman laporan masuk: 3 dari 4 laporan selesai dan kartu laporan prioritas rendah",
+              "src": "projects/kato-report/report-list-dark.webp",
+              "alt": "Halaman laporan masuk: 3 dari 4 laporan selesai dengan kartu laporan prioritas rendah dan sedang",
               "caption": "Pelacak laporan publik dengan filter status dan prioritas."
             }
           ]
