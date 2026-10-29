@@ -36,7 +36,16 @@ export function Research({
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-16">
           {publications.map((paper, i) => (
-            <Reveal key={paper.url} delay={i * 90} className="h-full">
+            <Reveal
+              key={paper.url}
+              delay={i * 90}
+              // An odd last paper sits centred under the pair above it, at the same width as its siblings.
+              className={
+                i === publications.length - 1 && i % 2 === 0
+                  ? "h-full md:col-span-2 md:w-[calc(50%-0.625rem)] md:justify-self-center"
+                  : "h-full"
+              }
+            >
               <article className="flex h-full flex-col rounded-card bg-studio-mist p-7 sm:p-9">
                 <p className="text-control font-semibold text-slate">
                   {paper.year} · {paper.venue}

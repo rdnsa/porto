@@ -14,8 +14,10 @@ const jobs = [
   { key: "profile/portrait-cutout.webp", from: "portrait-cutout.png", width: 1024, quality: 88, alpha: true },
   { key: "education/graduation.webp", from: "graduation.jpg", width: 1600, quality: 80 },
   { key: "about/itb-gig-economy.webp", from: "pdf/itb-event.png", width: 1600, quality: 78 },
-  { key: "projects/ifc-news/home.webp", from: "pdf/ifc-home.png", crop: { left: 0, top: 33, width: 794, height: 381 } },
-  { key: "projects/ifc-news/news-stream.webp", from: "pdf/ifc-news-stream.png" },
+  // IFC News: 2x captures of https://ifcnews.id in dark mode (Oct 2026), with the sign-up popup and tutorial prompt dismissed.
+  { key: "projects/ifc-news/home.webp", from: "ifc-news/home.png", width: 1400 },
+  { key: "projects/ifc-news/news-stream.webp", from: "ifc-news/news-stream.png", width: 1400 },
+  { key: "projects/ifc-news/weekly-analysis.webp", from: "ifc-news/weekly-analysis.png", crop: { left: 0, top: 170, width: 2880, height: 1480 }, width: 1400 },
   { key: "projects/ifc-news/search-console.webp", from: "pdf/ifc-search-console.png", crop: { left: 150, top: 88, width: 521, height: 226 } },
   { key: "projects/ifc-news/sprint-board.webp", from: "pdf/ifc-sprint-board.png", crop: { left: 0, top: 47, width: 547, height: 244 } },
   { key: "projects/ifc-news/team.webp", from: "pdf/ifc-team.png" },
@@ -25,9 +27,9 @@ const jobs = [
   { key: "projects/nordpartners/home.webp", from: "pdf/nordpartners-home.png" },
   { key: "projects/aix-expo/home.webp", from: "pdf/aix-home.png" },
   // Kato Report: 2x screenshots of https://ai-complaint.yvrtz.workers.dev in its dark theme (crops skip user uploads).
-  { key: "projects/kato-report/roles-dark.webp", from: "kato-report/home-dark.png", crop: { left: 400, top: 1200, width: 2080, height: 960 }, width: 1400 },
-  { key: "projects/kato-report/building-map-dark.webp", from: "kato-report/student-dark.png", crop: { left: 664, top: 714, width: 1552, height: 1032 }, width: 1400 },
-  { key: "projects/kato-report/report-list-dark.webp", from: "kato-report/reports-dark.png", crop: { left: 400, top: 0, width: 2080, height: 1470 }, width: 1400 },
+  { key: "projects/kato-report/roles-dark.webp", from: "kato-report/home-dark.png", crop: { left: 418, top: 1152, width: 2045, height: 893 }, width: 1400 },
+  { key: "projects/kato-report/building-map-dark.webp", from: "kato-report/student-dark.png", crop: { left: 940, top: 625, width: 1040, height: 1000 }, width: 1400 },
+  { key: "projects/kato-report/report-list-dark.webp", from: "kato-report/reports-dark.png", crop: { left: 677, top: 705, width: 1526, height: 1527 }, width: 1400 },
 ];
 
 // Files are overwritten in place, never wiped first: media/ also holds images with no source here

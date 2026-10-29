@@ -1,7 +1,7 @@
-import { type Env, loadPortfolio } from "../server/portfolio";
+import { type Env, loadPortfolioCached } from "../server/portfolio";
 
-export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
-  const portfolio = await loadPortfolio(env.DB);
+export const onRequestGet: PagesFunction<Env> = async ({ env, waitUntil }) => {
+  const portfolio = await loadPortfolioCached(env, waitUntil);
   const urls = [`${env.SITE_URL}/`, ...(portfolio?.projects ?? []).map((p) => `${env.SITE_URL}/work/${p.slug}`)];
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +

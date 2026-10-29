@@ -152,3 +152,30 @@ export async function loadPortfolio(db: D1Database): Promise<Portfolio | null> {
     ),
   };
 }
+
+// D1 is read once per edge location per minute, not once per request. Content edits (db:seed)
+// therefore show up within CACHE_SECONDS.
+const CACHE_SECONDS = 60;
+
+/** loadPortfolio behind the colo-local Cache API. Cache failures fall back to a direct D1 read. */
+export async function loadPortfolioCached(
+  env: Pick<Env, "DB" | "SITE_URL">,
+  waitUntil: (promise: Promise<unknown>) => void,
+): Promise<Portfolio | null> {
+  const key = new Request(`${env.SITE_URL}/__cache/portfolio`);
+  try {
+    const hit = await caches.default.match(key);
+    if (hit) return (await hit.json()) as Portfolio;
+  } catch (error) {
+    console.warn("Portfolio cache read failed", error);
+  }
+
+  const portfolio = await loadPortfolio(env.DB);
+  if (portfolio) {
+    const body = new Response(JSON.stringify(portfolio), {
+      headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_SECONDS}` },
+    });
+    waitUntil(caches.default.put(key, body).catch((error) => console.warn("Portfolio cache write failed", error)));
+  }
+  return portfolio;
+}

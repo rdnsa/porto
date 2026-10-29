@@ -241,6 +241,11 @@
           "caption": "News Stream — AI summaries, sentiment and fundamentals on every story."
         },
         {
+          "src": "projects/ifc-news/weekly-analysis.webp",
+          "alt": "IFC News Weekly Analysis page with an AI headline, weekly summary and an investor sentiment signal",
+          "caption": "Weekly Analysis — an AI headline, weekly summary and investor signal."
+        },
+        {
           "src": "projects/ifc-news/search-console.webp",
           "alt": "Google Search Console performance chart for ifcnews.id",
           "caption": "Google Search Console, 3-month view (June 2026)."
@@ -685,6 +690,7 @@
         "Best Graduate (Wisudawan Terbaik) of the Information Technology program at the university's 4th graduation ceremony, with a 3.97 GPA.",
         "Full-ride scholarship — 100% tuition for four years, awarded for academic performance and leadership.",
         "1st Place, Cyber Entrepreneur Product Innovation Competition — a Raspberry Pi and Nextcloud private cloud for SMEs and households.",
+        "Published research on optimizing multi-warehouse inventory processes with BPMN, cutting cycle time by 79.67% (SINTA 3, Google Scholar).",
         "Published research on private cloud storage with OwnCloud and Ubuntu Linux (Google Scholar).",
         "Published research on MSME growth prediction in West Java using linear regression (Google Scholar).",
         "Designed an IoT environmental monitoring system with NodeMCU, gas and climate sensors for real-time hazard alerts.",
@@ -773,6 +779,20 @@
   ],
   "publications": [
     {
+      "title": "Optimizing Multi-Warehouse Inventory Business Processes Using Business Process Model and Notation: A Case Study of PT Satellite of Glow",
+      "authors": [
+        "Raden Mochamad Issa Wirakusumah",
+        "Dedi Dwi Saputra"
+      ],
+      "venue": "Journal Digital Technology Trend",
+      "details": "5 (2), 75–85 · SINTA 3",
+      "year": "2026",
+      "url": "https://journal.kawanad.com/index.php/jdtt/article/view/464",
+      "pdfUrl": "https://journal.kawanad.com/index.php/jdtt/article/download/464/384",
+      "citations": 0,
+      "summary": "Models and redesigns the paper-and-spreadsheet inventory workflow of a four-warehouse company in BPMN. Cutting duplicate data entry took ten frequent activities from 150 to 30.5 minutes, a 79.67% efficiency gain."
+    },
+    {
       "title": "Predicting the Growth of MSMEs in West Java Towards Golden Indonesia 2045 Using Linear Regression",
       "authors": [
         "Raden Mochamad Issa Wirakusumah",
@@ -801,7 +821,7 @@
       "year": "2024",
       "url": "https://ejournal.mediaantartika.id/index.php/jka/article/view/232",
       "pdfUrl": "https://ejournal.mediaantartika.id/index.php/jka/article/download/232/51",
-      "citations": 3,
+      "citations": 4,
       "summary": "Evaluates ownCloud on Ubuntu, virtualised in VirtualBox, as a secure and flexible private cloud for storing coursework and exams, measuring its security and performance."
     }
   ],
@@ -1011,6 +1031,11 @@
               "src": "projects/ifc-news/news-stream.webp",
               "alt": "News stream IFC News dengan ringkasan dan sentimen AI",
               "caption": "News Stream — ringkasan AI, sentimen, dan data fundamental di setiap berita."
+            },
+            {
+              "src": "projects/ifc-news/weekly-analysis.webp",
+              "alt": "Halaman Weekly Analysis IFC News dengan headline AI, ringkasan mingguan, dan sinyal sentimen investor",
+              "caption": "Weekly Analysis — headline AI, ringkasan mingguan, dan sinyal investor."
             },
             {
               "src": "projects/ifc-news/search-console.webp",
@@ -1376,6 +1401,7 @@
             "Lulusan Terbaik (Wisudawan Terbaik) program Teknologi Informasi pada Wisuda ke-4 universitas, dengan IPK 3.97.",
             "Beasiswa penuh — 100% biaya kuliah selama empat tahun, atas prestasi akademik dan kepemimpinan.",
             "Juara 1, Cyber Entrepreneur Product Innovation Competition — private cloud berbasis Raspberry Pi dan Nextcloud untuk UMKM dan rumah tangga.",
+            "Menerbitkan riset optimalisasi proses inventaris multigudang dengan BPMN, memangkas waktu proses hingga 79,67% (SINTA 3, Google Scholar).",
             "Menerbitkan riset tentang penyimpanan private cloud dengan OwnCloud dan Ubuntu Linux (Google Scholar).",
             "Menerbitkan riset prediksi pertumbuhan UMKM di Jawa Barat dengan regresi linear (Google Scholar).",
             "Merancang sistem pemantauan lingkungan berbasis IoT dengan NodeMCU, sensor gas dan iklim, untuk peringatan bahaya real-time.",
@@ -1459,6 +1485,10 @@
         }
       ],
       "publications": [
+        {
+          "title": "Optimalisasi Proses Bisnis Inventaris Multigudang Menggunakan Business Process Model and Notation: Studi Kasus PT Satellite of Glow",
+          "summary": "Memodelkan dan merancang ulang alur inventaris berbasis buku catatan dan spreadsheet di perusahaan dengan empat gudang menggunakan BPMN. Pengurangan input data ganda memangkas waktu sepuluh aktivitas utama dari 150 menjadi 30,5 menit, efisiensi 79,67%."
+        },
         {
           "summary": "Memproyeksikan jumlah UMKM di Jawa Barat hingga 2045 dengan model regresi linear berbasis data terbuka Jawa Barat, sejalan dengan visi Indonesia Emas 2045.",
           "title": "Prediksi Pertumbuhan Jumlah UMKM di Jawa Barat Menuju Indonesia Emas 2045 Menggunakan Regresi Linear"
